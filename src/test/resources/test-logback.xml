@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="guru.springframework.controllers" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <!--<appender-ref ref="FILE"/>-->
+    </logger>
+    <logger name="guru.springframework.helpers" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <!--<appender-ref ref="FILE"/>-->
+    </logger>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.springframework.web" level="ERROR"/>
+    <logger name="org.springframework.boot.test.context.SpringBootTestContextBootstrapper" level="FATAL" additivity="false" />
+    <logger name="org.springframework.test.context.support.AbstractContextLoader" level="WARN" additivity="false" />
+</configuration>

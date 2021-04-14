@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "app.server.address",
+      "type": "java.lang.String",
+      "description": "Description for app.server.address."
+  }
+] }

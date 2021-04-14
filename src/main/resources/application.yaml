@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: htmx-demo
+  main:
+    banner-mode: "off"
+  thymeleaf:
+    cache: false
+  jpa:
+    open-in-view: true
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-stacktrace: always
+  address: localhost
+  port: ${PORT:8080}
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %yellow(%logger{40}.%M\\(%class{0}.java:%line\\)) - %msg%throwable%n"
+  level:
+    root: WARN
+  org:
+    springframework:
+      boot:
+        test:
+          context:
+            SpringBootTestContextBootstrapper: WARN
+      test:
+        context:
+          support:
+            AbstractContextLoader: OFF
+            AnnotationConfigContextLoaderUtils: OFF
