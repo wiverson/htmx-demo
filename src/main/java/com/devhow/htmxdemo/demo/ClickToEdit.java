@@ -31,7 +31,7 @@ public class ClickToEdit {
         return "click-to-edit-form";
     }
 
-    @PostMapping("/commit/{id}")
+    @PostMapping("/commit")
     public String editPost(Contact contact, Model model) {
         model.addAttribute("contact", contact);
         return "click-to-edit-default";
