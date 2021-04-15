@@ -1,0 +1,19 @@
+<form hx-post="/click-to-edit/commit/1" hx-target="this" hx-swap="outerHTML">
+    <div>
+        <label>First Name
+            <input type="text" name="firstName" th:value="${contact.firstName}">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Last Name
+            <input type="text" name="lastName" th:value="${contact.lastName}">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Email address
+            <input type="email" name="email" th:value="${contact.email}">
+        </label>
+    </div>
+    <button class="btn">Submit</button>
+    <button class="btn" hx-post="/click-to-edit/cancel/1">Cancel</button>
+</form>

@@ -10,7 +10,7 @@ spring:
 server:
   error:
     whitelabel:
-      enabled: false
+      enabled: true
     include-stacktrace: always
   address: localhost
   port: ${PORT:8080}

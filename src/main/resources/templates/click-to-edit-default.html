@@ -1,0 +1,13 @@
+<form hx-post="/click-to-edit/edit/1" hx-target="this" hx-swap="outerHTML">
+    <div><label>First Name</label>: <span th:text="${contact.firstName}"></span></div>
+    <div><label>Last Name</label>: <span th:text="${contact.lastName}"></span></div>
+    <div><label>Email</label>: <span th:text="${contact.email}"></span></div>
+
+    <input type="hidden" name="firstName" th:value="${contact.firstName}">
+    <input type="hidden" name="lastName" th:value="${contact.lastName}">
+    <input type="hidden" name="email" th:value="${contact.email}">
+
+    <button class="btn btn-primary">
+        Click To Edit
+    </button>
+</form>
