@@ -18,6 +18,7 @@ Bootstrap that is looking for jQuery, not htmx.
 You can add the WebJar for htmx to your pom.xml like this:
 
 ```xml
+
 <dependency>
     <groupId>org.webjars.npm</groupId>
     <artifactId>htmx.org</artifactId>
@@ -28,6 +29,7 @@ You can add the WebJar for htmx to your pom.xml like this:
 ...and then add the following to your application Thymeleaf/HTML to use htmx:
 
 ```xml
+
 <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 ```
 
@@ -38,6 +40,10 @@ And you're off to the races!
 I originally thought about building a much larger demo, using Spring Security, Spring Data JPA, etc. I decided to back
 off on that, as it just added complexity that's unnecessary for the main purpose - showing how htmx works with Spring
 Boot.
+
+Aside from adding a simple Controller and some templates, the most interesting parts of this project are likely the
+application.yaml and logback.xml files, which are set up to dramatically reduce the log noise for a typical Spring Boot
+project.
 
 If you think a more complicated demo app would be useful, let me know.
 
