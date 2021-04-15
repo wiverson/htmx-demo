@@ -17,6 +17,9 @@
 </head>
 <body>
 <div class="container">
+    <p>Page loaded at <span th:text="${now}"></span></p>
+</div>
+<div class="container">
     <form hx-post="/click-to-edit/edit/1" hx-target="this" hx-swap="outerHTML">
         <div><label>First Name</label>: <span th:text="${contact.firstName}"></span></div>
         <div><label>Last Name</label>: <span th:text="${contact.lastName}"></span></div>

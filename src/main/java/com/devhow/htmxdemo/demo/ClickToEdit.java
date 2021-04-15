@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/click-to-edit")
 public class ClickToEdit {
@@ -17,6 +19,8 @@ public class ClickToEdit {
         contact.lastName = "Smith";
         contact.email = "bsmith@example.com";
         model.addAttribute("contact", contact);
+
+        model.addAttribute("now", new Date().toInstant().toString());
 
         return "click-to-edit";
     }
