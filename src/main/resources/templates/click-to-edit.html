@@ -17,8 +17,10 @@
 </head>
 <body>
 <div class="container alert alert-secondary" role="alert">
-    <p>Return to <a href="/">Demo List</a></p>
-    <p>Page loaded at <span th:text="${now}"></span></p>
+    <p>This page rendered at <span th:text="${now}"></span></p>
+    <p>Return to <a href="/">index</a>.</p>
+    <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/click-to-edit/" target="_blank">htmx
+        Click To Edit demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
 </div>
 <div class="container">
     <form hx-post="/click-to-edit/edit/1" hx-target="this" hx-swap="outerHTML">
