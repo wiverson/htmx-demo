@@ -37,12 +37,6 @@ public class ClickToEdit {
         return "click-to-edit-default";
     }
 
-    @PostMapping("/cancel/{id}")
-    public String cancelEdit(Contact contact, Model model) {
-        model.addAttribute("contact", contact);
-        return "click-to-edit-default";
-    }
-
     public class Contact {
         private String firstName;
         private String lastName;
