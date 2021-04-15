@@ -18,7 +18,6 @@ Bootstrap that is looking for jQuery, not htmx.
 You can add the WebJar for htmx to your pom.xml like this:
 
 ```xml
-
 <dependency>
     <groupId>org.webjars.npm</groupId>
     <artifactId>htmx.org</artifactId>
@@ -29,8 +28,7 @@ You can add the WebJar for htmx to your pom.xml like this:
 ...and then add the following to your application Thymeleaf/HTML to use htmx:
 
 ```xml
-
-<script src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 ```
 
 And you're off to the races!
