@@ -1,88 +1,76 @@
 package com.devhow.htmxdemo.demo;
 
+import org.intellij.lang.annotations.Language;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
+import java.util.List;
 
-import static org.springframework.web.util.HtmlUtils.htmlEscape;
-
+/**
+ * This demonstration uses HTML generated here (in the controller!) instead of just the HTML coming from Thymeleaf
+ * templates.
+ * <p>
+ * This is really intended to be a very primitive transitional demonstration, showing the basics of how HTMX could
+ * serve as the starting point for a more component-oriented approach, or perhaps even used in combination with
+ * WebSockets and Server-Side Events.
+ * https://htmx.org/docs/#websockets-and-sse
+ * <p>
+ * Put another way - this is a pretty messy, hacky mess... but it's also the kernel for starting what could be a
+ * different approach.
+ */
 @Controller
 @RequestMapping("/infinite-scroll")
 public class InfiniteScroll {
 
     @GetMapping
     public String start(Model model) {
-        Contact contact = new Contact();
-        contact.firstName = "Bob";
-        contact.lastName = "Smith";
-        contact.email = "bsmith@example.com";
-        model.addAttribute("contact", contact);
-
         model.addAttribute("now", new Date().toInstant().toString());
-
-        return "click-to-edit";
+        return "infinite-scroll";
     }
 
-    // language=html
-    String loadText = """
-            <p><b>hello</b></p>
+    @Language("html")
+    String contactHtml = """
+             <td>%s</td>
+             <td>%s</td>
+             <td>%s</td>
+             </tr>
             """;
 
-    @PostMapping(value =
+    @Language("html")
+    String loadHtml = """
+             <tr hx-get="/infinite-scroll/page/%d"
+                             hx-trigger="revealed"
+                             hx-swap="afterend"
+             <tr>
+             <td>%s</td>
+             <td>%s</td>
+             <td>%s</td>
+             </tr>
+            """;
+
+    @GetMapping(value =
             "/page/{id}", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String editForm(Model model) {
-        Contact contact = new Contact();
+    public String nextPage(Model model, @PathVariable Integer id) {
 
-        contact.firstName = "first";
-        contact.lastName = "last";
-        contact.email = "first.last@example.com";
+        StringBuilder result = new StringBuilder();
 
-        model.addAttribute("contact", contact);
+        List<Contact> demoContacts = Contact.randomContacts(9);
+        for (Contact c : demoContacts) {
+            result.append("<tr>");
+            result.append(contactHtml.formatted(c.getFirstName(), c.getLastName(), c.getEmail()));
+        }
 
-        return htmlEscape(loadText.formatted());
+        Contact last = Contact.randomContacts(1).get(0);
+
+        result.append(loadHtml.formatted(id + 1, last.getFirstName(), last.getLastName(), last.getEmail()));
+
+        return result.toString();
     }
-
-    @PostMapping("/commit")
-    public String editPost(Contact contact, Model model) {
-        model.addAttribute("contact", contact);
-        return "click-to-edit-default";
-    }
-
-    public class Contact {
-        private String firstName;
-        private String lastName;
-        private String email;
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-    }
-
 }
