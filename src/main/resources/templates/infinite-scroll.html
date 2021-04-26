@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Click To Edit</title>
+
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <!--Bootstrap CSS-->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <!--Bootstrap JS-->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <!--HTMX-->
+    <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+</head>
+<body>
+<div class="container alert alert-secondary" role="alert">
+    <p>This page rendered at <span th:text="${now}"></span></p>
+    <p>Return to <a href="/">index</a>.</p>
+    <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/click-to-edit/" target="_blank">htmx
+        Click To Edit demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
+</div>
+<div class="container">
+    <table hx-indicator=".htmx-indicator">
+        <tr hx-get="/infinite-scroll/?page=2"
+            hx-trigger="revealed"
+            hx-swap="afterend">
+            <td>Agent Smith</td>
+            <td>void29@null.org</td>
+            <td>55F49448C0</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
