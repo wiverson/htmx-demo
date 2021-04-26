@@ -15,7 +15,7 @@ public class ClickToEdit {
     @GetMapping
     public String start(Model model) {
         model.addAttribute("contact", Contact.demoContact());
-        model.addAttribute("now", new Date().toInstant().toString());
+        model.addAttribute("now", new Date().toInstant());
 
         return "click-to-edit";
     }

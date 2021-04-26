@@ -11,7 +11,7 @@ public class DemoOverview {
 
     @GetMapping("/")
     public String overview(Model model) {
-        model.addAttribute("now", new Date().toInstant().toString());
+        model.addAttribute("now", new Date());
         return "index";
     }
 
