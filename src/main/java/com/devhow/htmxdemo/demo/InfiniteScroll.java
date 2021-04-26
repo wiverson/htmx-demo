@@ -45,8 +45,8 @@ public class InfiniteScroll {
     @Language("html")
     String loadHtml = """
              <tr hx-get="/infinite-scroll/page/%d"
-                             hx-trigger="revealed"
-                             hx-swap="afterend"
+                 hx-trigger="revealed"
+                 hx-swap="afterend settle:0s"
              <tr>
              <td>%s</td>
              <td>%s</td>
@@ -54,10 +54,9 @@ public class InfiniteScroll {
              </tr>
             """;
 
-    @GetMapping(value =
-            "/page/{id}", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/page/{id}", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String nextPage(Model model, @PathVariable Integer id) {
+    public String nextPage(@PathVariable Integer id) {
 
         StringBuilder result = new StringBuilder();
 

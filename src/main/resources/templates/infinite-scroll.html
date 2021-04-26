@@ -1,36 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>Infinite Scroll</title>
-
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <!--Bootstrap CSS-->
-    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <!--Bootstrap JS-->
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <!--HTMX-->
-    <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 </head>
 <body>
-<div class="container alert alert-secondary" role="alert">
-    <p>This page rendered at <span th:text="${now}"></span></p>
-    <p>Return to <a href="/">index</a>.</p>
-    <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/infinite-scroll/" target="_blank">htmx
-        Infinite Scroll demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
-</div>
-<img style="background-color: black; position: sticky; top: 0; left: 0;"
-     class="htmx-indicator"
-     src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
-<div class="container">
-    <table hx-indicator=".htmx-indicator">
-        <tr th:hx-get="@{/infinite-scroll/page/1}" hx-trigger="revealed" hx-swap="afterend">
-        </tr>
-    </table>
+<section layout:fragment="content">
+    <div class="container alert alert-secondary" role="alert">
+        <p>This page rendered at <span th:text="${now}"></span></p>
+        <p>Return to <a href="/">index</a>.</p>
+        <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/infinite-scroll/" target="_blank">htmx
+            Infinite Scroll demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
+    </div>
+    <img alt="progress" style="background-color: black; position: sticky; top: 0; left: 0;"
+         class="htmx-indicator"
+         src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
+    <div class="container">
+        <table hx-indicator=".htmx-indicator">
+            <tr th:hx-get="@{/infinite-scroll/page/1}" hx-trigger="revealed" hx-swap="afterend settle:0s">
+            </tr>
+        </table>
 
-</div>
+    </div>
+</section>
 </body>
 </html>

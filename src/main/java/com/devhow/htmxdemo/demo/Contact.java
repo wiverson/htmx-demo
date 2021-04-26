@@ -42,7 +42,7 @@ public class Contact {
         return contact;
     }
 
-    private static Faker faker = new Faker();
+    private static final Faker faker = new Faker();
 
     static public List<Contact> randomContacts(int count) {
 

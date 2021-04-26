@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+
+<head>
+    <title>Layout page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Infinite Scroll</title>
+
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <!--Bootstrap CSS-->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <!--Bootstrap JS-->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+    <!-- Debug HTMX -->
+    <script type="text/javascript" th:src="@{/js/htmx.js}"></script>
+
+    <!--HTMX-->
+    <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+</head>
+
+<body>
+<header>
+    <h1>HTMX + Spring Boot Demo</h1>
+</header>
+
+<section layout:fragment="content">
+    <p>Page content goes here</p>
+</section>
+</body>
+
+</html>
