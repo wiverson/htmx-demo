@@ -4,24 +4,31 @@
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
 <head>
     <title>Infinite Scroll</title>
+    <style>
+        .htmx-indicator {
+            background-color: black;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            padding: 5px 5px 5px 5px
+        }
+    </style>
 </head>
 <body>
 <section layout:fragment="content">
     <div class="container alert alert-secondary" role="alert">
-        <p>This page rendered at <span th:text="${now}"></span></p>
-        <p>Return to <a href="/">index</a>.</p>
         <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/infinite-scroll/" target="_blank">htmx
             Infinite Scroll demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
     </div>
-    <img alt="progress" style="background-color: black; position: sticky; top: 0; left: 0;"
-         class="htmx-indicator"
-         src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
     <div class="container">
         <table hx-indicator=".htmx-indicator">
             <tr th:hx-get="@{/infinite-scroll/page/1}" hx-trigger="revealed" hx-swap="afterend settle:0s">
             </tr>
         </table>
-
+        <img alt="Loading Indicator"
+             class="htmx-indicator"
+             src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
     </div>
 </section>
 </body>

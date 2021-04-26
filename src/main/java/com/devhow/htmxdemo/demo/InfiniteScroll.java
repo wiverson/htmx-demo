@@ -30,7 +30,7 @@ public class InfiniteScroll {
 
     @GetMapping
     public String start(Model model) {
-        model.addAttribute("now", new Date().toInstant().toString());
+        model.addAttribute("now", new Date().toInstant());
         return "infinite-scroll";
     }
 
@@ -69,6 +69,12 @@ public class InfiniteScroll {
         Contact last = Contact.randomContacts(1).get(0);
 
         result.append(loadHtml.formatted(id + 1, last.getFirstName(), last.getLastName(), last.getEmail()));
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return result.toString();
     }
