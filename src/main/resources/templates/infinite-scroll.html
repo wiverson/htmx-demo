@@ -4,16 +4,7 @@
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
 <head>
     <title>Infinite Scroll</title>
-    <style>
-        .htmx-indicator {
-            background-color: black;
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 60px;
-            padding: 5px 5px 5px 5px
-        }
-    </style>
+
 </head>
 <body>
 <section layout:fragment="content">
@@ -26,9 +17,6 @@
             <tr th:hx-get="@{/infinite-scroll/page/1}" hx-trigger="revealed" hx-swap="afterend settle:0s">
             </tr>
         </table>
-        <img alt="Loading Indicator"
-             class="htmx-indicator"
-             src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
     </div>
 </section>
 </body>

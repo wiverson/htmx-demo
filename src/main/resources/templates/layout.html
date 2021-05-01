@@ -17,10 +17,24 @@
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
     <!-- Debug HTMX -->
-    <script type="text/javascript" th:src="@{/js/htmx.js}"></script>
+    <!-- <script type="text/javascript" th:src="@{/js/htmx.js}"></script> -->
 
     <!--HTMX-->
     <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+
+    <!-- Hyperscript for fancier stuff -->
+    <script type="text/javascript" th:src="@{/webjars/hyperscript.org/dist/_hyperscript.js}"></script>
+
+    <style>
+        .htmx-indicator {
+            background-color: black;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            padding: 5px 5px 5px 5px
+        }
+    </style>
 </head>
 
 <body>
@@ -34,6 +48,9 @@
 <section layout:fragment="content">
     <p>Page content goes here</p>
 </section>
+<img alt="Loading Indicator"
+     class="htmx-indicator"
+     src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
 </body>
 
 </html>
