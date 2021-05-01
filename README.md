@@ -15,15 +15,23 @@ frameworks.
 Probably the most interesting bit is the use of webjars to include Bootstrap, jQuery, and htmx. Technically, it's
 Bootstrap that is looking for jQuery, not htmx.
 
-You can add the WebJar for htmx to your pom.xml like this:
+You can add the WebJar for [htmx](https://htmx.org/) (and [hyperscript](https://hyperscript.org/) as well) to your
+pom.xml like this:
 
 ```xml
 
-<dependency>
-    <groupId>org.webjars.npm</groupId>
-    <artifactId>htmx.org</artifactId>
-    <version>1.3.2</version>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>htmx.org</artifactId>
+        <version>1.3.3</version>
+    </dependency>
+    <dependency>
+        <groupId>org.webjars.npm</groupId>
+        <artifactId>hyperscript.org</artifactId>
+        <version>0.0.9</version>
+    </dependency>
+</dependencies>
 ```
 
 ...and then add the following to your application Thymeleaf/HTML to use htmx:
