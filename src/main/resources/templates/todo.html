@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Click To Edit</title>
+
+    <style>
+        tr.htmx-swapping td {
+            opacity: 0;
+            transition: opacity 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container alert alert-secondary" role="alert">
+        <p>This is a version of a "todo" app done with HTMX.</p>
+    </div>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">
+                    To Do
+                </th>
+                <th scope="col">
+                    Done
+                </th>
+                <th scope="col" class="w-25">
+                    &nbsp;
+                </th>
+            </thead>
+            <tbody id="todo-list">
+            <tr>
+                <td scope="row">Get Groceries</td>
+                <td>
+                    <!--suppress HtmlFormInputWithoutLabel -->
+                    <input type="checkbox"/>
+                </td>
+                <td>
+                    <input
+                            hx-confirm="Are you sure?"
+                            hx-target="closest tr"
+                            hx-swap="outerHTML swap:1s"
+                            hx-delete="/todo/delete"
+                            hx-trigger="click"
+                            type="button"
+                            class="btn btn-danger"
+                            value="Delete"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <tr>
+                <td colspan="2">
+                    <input autofocus="autofocus"
+                           class="form-control-plaintext"
+                           id="new-todo"
+                           name="new-todo"
+                           placeholder="To do..."
+                           required
+                           type="text">
+                </td>
+                <td class="w-25">
+                    <input
+                            _="on htmx:afterRequest put '' into #new-todo.value"
+                            id="mon"
+                            hx-include="#new-todo"
+                            th:hx-post="@{/todo/create}"
+                            hx-target="#todo-list"
+                            hx-swap="beforeend"
+                            hx-trigger="click"
+                            type="button" class="btn btn-primary" value="Add"/></td>
+            </tr>
+        </table>
+    </div>
+</section>
+</body>
+</html>
