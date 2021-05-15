@@ -46,7 +46,7 @@ public class InfiniteScroll {
     String loadHtml = """
              <tr hx-get="/infinite-scroll/page/%d"
                  hx-trigger="revealed"
-                 hx-swap="afterend settle:0s"
+                 hx-swap="afterend"
              <tr>
              <td>%s</td>
              <td>%s</td>

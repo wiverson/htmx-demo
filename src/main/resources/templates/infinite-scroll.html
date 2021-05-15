@@ -14,7 +14,7 @@
     </div>
     <div class="container">
         <table hx-indicator=".htmx-indicator">
-            <tr th:hx-get="@{/infinite-scroll/page/1}" hx-trigger="revealed" hx-swap="afterend settle:0s">
+            <tr hx-get="/infinite-scroll/page/1" hx-trigger="revealed" hx-swap="afterend settle:0s">
             </tr>
         </table>
     </div>
