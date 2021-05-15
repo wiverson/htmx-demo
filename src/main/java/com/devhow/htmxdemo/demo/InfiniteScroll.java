@@ -36,9 +36,10 @@ public class InfiniteScroll {
 
     @Language("html")
     String contactHtml = """
-             <td>%s</td>
-             <td>%s</td>
-             <td>%s</td>
+             <tr>
+                 <td>%s</td>
+                 <td>%s</td>
+                 <td>%s</td>
              </tr>
             """;
 
@@ -46,11 +47,10 @@ public class InfiniteScroll {
     String loadHtml = """
              <tr hx-get="/infinite-scroll/page/%d"
                  hx-trigger="revealed"
-                 hx-swap="afterend"
-             <tr>
-             <td>%s</td>
-             <td>%s</td>
-             <td>%s</td>
+                 hx-swap="afterend">
+                 <td>%s</td>
+                 <td>%s</td>
+                 <td>%s</td>
              </tr>
             """;
 
@@ -62,7 +62,6 @@ public class InfiniteScroll {
 
         List<Contact> demoContacts = Contact.randomContacts(9);
         for (Contact c : demoContacts) {
-            result.append("<tr>");
             result.append(contactHtml.formatted(c.getFirstName(), c.getLastName(), c.getEmail()));
         }
 
@@ -70,6 +69,7 @@ public class InfiniteScroll {
 
         result.append(loadHtml.formatted(id + 1, last.getFirstName(), last.getLastName(), last.getEmail()));
 
+        // This is just to simulate a slow[er] server response, causing the HTMX wait indicator to display
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
