@@ -35,7 +35,7 @@ public class InfiniteScroll {
     }
 
     @Language("html")
-    String contactHtml = """
+    final String contactHtml = """
              <tr>
                  <td>%s</td>
                  <td>%s</td>
@@ -44,7 +44,7 @@ public class InfiniteScroll {
             """;
 
     @Language("html")
-    String loadHtml = """
+    final String loadHtml = """
              <tr hx-get="/infinite-scroll/page/%d"
                  hx-trigger="revealed"
                  hx-swap="afterend">

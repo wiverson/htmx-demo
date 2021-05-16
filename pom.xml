@@ -67,6 +67,21 @@
         <!--            <scope>runtime</scope>-->
         <!--        </dependency>-->
 
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>20.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Layouts -->
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+            <version>2.5.3</version>
+        </dependency>
+
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,7 +115,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>4.6.0-1</version>
+            <version>5.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -117,17 +132,8 @@
             <artifactId>hyperscript.org</artifactId>
             <version>0.0.9</version>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>20.1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>nz.net.ultraq.thymeleaf</groupId>
-            <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>2.5.3</version>
-        </dependency>
+
+
     </dependencies>
 
     <build>

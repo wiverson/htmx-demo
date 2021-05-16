@@ -4,20 +4,14 @@
       xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
 
 <head>
-    <title>Layout page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Infinite Scroll</title>
 
     <script src="/webjars/jquery/jquery.min.js"></script>
     <!--Bootstrap CSS-->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <!--Bootstrap JS-->
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
-    <!-- Debug HTMX -->
-    <!-- <script type="text/javascript" th:src="@{/js/htmx.js}"></script> -->
 
     <!--HTMX-->
     <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
@@ -41,7 +35,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">HTMX + Spring Boot Demo</a>
-        <p class="navbar-text">Rendered at <span th:text="${#dates.format(now, 'dd/MMM/yyyy HH:mm')}"></span></p>
+        <p class="navbar-text">Rendered at <!--suppress ThymeleafVariablesResolveInspection -->
+            <span th:text="${#dates.format(now, 'dd/MMM/yyyy HH:mm')}"></span></p>
     </div>
 </nav>
 
