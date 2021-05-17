@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Click To Edit</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container alert alert-secondary" role="alert">
+        <p>Example of all modern HTML input types combined with HTMX.</p>
+    </div>
+    <div class="container">
+        <form>
+            <label>Button
+                <input type="button" name="demo-button" value="demo-button-value">
+            </label>
+
+            <label>Checkbox
+                <input type="checkbox" name="demo-checkbox" value="demo-checkbox-value">
+            </label>
+
+            <label>Color
+                <input type="color" name="demo-color" value="blue">
+            </label>
+
+            <label>Date
+                <input type="date" name="demo-date">
+            </label>
+
+            <label>Date/Time (Local)
+                <input type="datetime-local" name="demo-date-time-local">
+            </label>
+
+            <label>Email
+                <input type="email" name="demo-email">
+            </label>
+
+            <label>File
+                <input type="file" name="demo-file">
+            </label>
+
+            <label>Hidden
+                <input type="hidden" name="demo-hidden">
+            </label>
+
+            <label>Image
+                <input type="image" name="demo-image">
+            </label>
+
+            <label>Month
+                <input type="month" name="demo-month">
+            </label>
+
+            <label>Number
+                <input type="number" name="demo-number" min="0" max="100">
+            </label>
+
+            <label>Password
+                <input type="password" name="demo-password">
+            </label>
+
+            <label>Radio
+                <input id="demo-radio-a" type="radio" name="demo-radio" value="a">
+                <input id="demo-radio-b" type="radio" name="demo-radio" value="b">
+                <input id="demo-radio-c" type="radio" name="demo-radio" value="c">
+            </label>
+
+            <label>Range (Slider)
+                <input type="range" name="demo-range" min="0" max="100">
+            </label>
+
+            <label>Reset
+                <input type="reset">
+            </label>
+
+            <label>Search
+                <input type="search">
+            </label>
+
+            <label>Submit
+                <input type="submit">
+            </label>
+
+            <label>Telephone
+                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            </label>
+
+            <label>Text
+                <input type="text">
+            </label>
+
+            <label>Time
+                <input type="time">
+            </label>
+
+            <label>URL
+                <input type="url">
+            </label>
+
+            <label>Week
+                <input type="week">
+            </label>
+        </form>
+    </div>
+</section>
+</body>
+</html>
