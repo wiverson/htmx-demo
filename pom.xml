@@ -36,6 +36,17 @@
         <!--            <scope>test</scope>-->
         <!--        </dependency>-->
 
+        <!-- Spring Data related -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.h2database</groupId>-->
+        <!--            <artifactId>h2</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -66,21 +77,12 @@
             <version>1.4.0</version>
         </dependency>
 
+        <!-- Java implementation of Moustache/Handlebars -->
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
             <version>4.2.0</version>
         </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.h2database</groupId>-->
-        <!--            <artifactId>h2</artifactId>-->
-        <!--            <scope>runtime</scope>-->
-        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -317,6 +319,8 @@
 
     <profiles>
         <profile>
+            <!-- Usually I would combine this with a Postgres profile and use the h2 for quick & dirty local
+              testing, Postgres for integration/prod. For now it's just h2, might add Postgres later. -->
             <id>h2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -337,6 +341,7 @@
             </build>
         </profile>
         <profile>
+            <!-- Use this profile to allow a debugger to attach to a running Spring Boot instance -->
             <id>spring-boot-debug</id>
             <activation>
                 <activeByDefault>false</activeByDefault>

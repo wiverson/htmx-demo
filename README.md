@@ -30,11 +30,11 @@ for performance and security reasons.
 
 ## Dependencies
 
-[WebJars](https://www.webjars.org) are used to include Bootstrap, jQuery, htmx and hyperscript. While Bootstrap v5
-doesn't technically need jQuery any more, I left it in for now just in case. More information
+[WebJars](https://www.webjars.org) are used to install and manage Bootstrap, jQuery, htmx and hyperscript. While
+Bootstrap v5 doesn't technically need jQuery any more, I left it in for now just in case. More information
 on [using WebJars with Spring Boot](https://www.webjars.org/documentation#springboot).
 
-You can add the WebJars for [htmx](https://htmx.org/) and [hyperscript](https://hyperscript.org/ to your pom.xml like
+You can add the WebJars for [htmx](https://htmx.org/) and [hyperscript](https://hyperscript.org/) to your pom.xml like
 this:
 
 ```xml
@@ -76,11 +76,6 @@ this, [index.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/re
 includes the line `<section layout:fragment="content">` which instructs the
 [Thymeleaf Layout Dialect](https://github.com/ultraq/thymeleaf-layout-dialect) to wrap the section with
 [layout.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/templates/layout.html).
-
-
-I originally thought about building a much larger demo, using Spring Security, Spring Data JPA, etc. I decided to back
-off on that, as it just added complexity that's unnecessary for the main purpose - showing how htmx works with Spring
-Boot.
 
 ## Logging
 
