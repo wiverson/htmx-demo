@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+<head>
+    <title>Value Select</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container alert alert-secondary" role="alert">
+        <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/value-select/" target="_blank">htmx
+            Value Select demo</a>, modified for vanilla Bootstrap, Spring Boot and Handlebars templates.</p>
+    </div>
+    <div class="container">
+        <div>
+            <label>Make</label>
+            <select name="make" hx-get="/value-select/models" hx-target="#models" hx-indicator=".htmx-indicator">
+                <option value="audi">Audi</option>
+                <option value="toyota">Toyota</option>
+                <option value="bmw">BMW</option>
+            </select>
+        </div>
+        <div>
+            <label>Model</label>
+            <select id="models" name="model">
+                <option value="a1">A1</option>
+            </select>
+        </div>
+    </div>
+</section>
+</body>
+</html>
