@@ -7,6 +7,24 @@ spring:
     cache: false
   jpa:
     open-in-view: true
+  mail:
+    scheduler:
+      persistence:
+        enabled: false
+        redis:
+          embedded: false
+          enabled: false
+    host: smtp.gmail.com
+    port: 587
+    username: name.surname@gmail.com
+    password: V3ry_Str0ng_Password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 server:
   error:
     whitelabel:
@@ -30,3 +48,6 @@ logging:
           support:
             AbstractContextLoader: OFF
             AnnotationConfigContextLoaderUtils: OFF
+external:
+  server:
+    address: http://localhost:8080/

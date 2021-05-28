@@ -1,4 +1,4 @@
-package com.devhow.htmxdemo;
+package com.devhow;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.boot.SpringApplication;

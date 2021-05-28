@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign Up</title>
+</head>
+<body class="full-center">
+
+<form class="form-signin" role="form" th:action="@{/public/sign-up}" th:method="post">
+    <p><img class="img-responsive center-block d-block mx-auto" src="/public/logo.png" width="72" height="72"
+            alt="ChangeNode"></p>
+
+    <label class="sr-only" for="username">Email </label>
+    <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required
+           autofocus/>
+    <br/>
+    <label class="sr-only" for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
+    <label class="sr-only" for="password-confirm">Confirm Password</label>
+    <input type="password" id="password-confirm" name="password-confirm" class="form-control"
+           placeholder="Confirm Password"
+           required/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+</form>
+
+</body>
+</html>
