@@ -117,7 +117,7 @@ public class UserController {
     String confirmMail(@RequestParam("token") String token, ModelMap modelMap) {
         try {
             userService.confirmUser(token).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN));
-            return signIn("", "Confirmed!", modelMap);
+            return signIn("", "Email Address Confirmed!", modelMap);
         } catch (IdentityServiceException e) {
             return signIn("", "Unknown Token", modelMap);
         }
