@@ -167,9 +167,11 @@ public class UserService {
 
     public Optional<User> confirmUser(String confirmationToken) throws IdentityServiceException {
 
-        UserValidation userValidation = userValidationRepository.findByToken(confirmationToken).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN, "Invalid Token (21)"));
+        UserValidation userValidation = userValidationRepository.findByToken(confirmationToken).orElseThrow(() ->
+                new IdentityServiceException(BAD_TOKEN, "Invalid Token (21)"));
 
-        User user = userRepository.findById(userValidation.getUser()).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN, "Invalid Token (22)"));
+        User user = userRepository.findById(userValidation.getUser()).orElseThrow(() ->
+                new IdentityServiceException(BAD_TOKEN, "Invalid Token (22)"));
 
         if (!validation(user).tokenIsCurrent())
             throw new IdentityServiceException(BAD_TOKEN, "");
