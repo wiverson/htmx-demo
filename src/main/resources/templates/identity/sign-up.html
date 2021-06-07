@@ -3,25 +3,39 @@
 
 <head>
     <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap CSS-->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <!--Bootstrap JS-->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body class="full-center">
+<div class="container">
+    <form class="form-signin" role="form" th:action="@{/public/sign-up}" th:method="post">
+        <div class="mt-4 mb-4"><a href="/"><img class="img-responsive center-block d-block mx-auto"
+                                                src="/public/logo.png" width="72" height="72"
+                                                alt="Demo App"></a></div>
 
-<form class="form-signin" role="form" th:action="@{/public/sign-up}" th:method="post">
-    <p><img class="img-responsive center-block d-block mx-auto" src="/public/logo.png" width="72" height="72"
-            alt="ChangeNode"></p>
+        <div class="form-floating mb-3">
+            <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required
+                   autofocus/>
+            <label class="sr-only" for="username">Email </label>
+        </div>
 
-    <label class="sr-only" for="username">Email </label>
-    <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required
-           autofocus/>
-    <br/>
-    <label class="sr-only" for="password">Password</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
-    <label class="sr-only" for="password-confirm">Confirm Password</label>
-    <input type="password" id="password-confirm" name="password-confirm" class="form-control"
-           placeholder="Confirm Password"
-           required/>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-</form>
+        <div class="form-floating mb-3">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
+            <label class="sr-only" for="password">Password</label>
+        </div>
 
+        <div class="form-floating mb-3">
+            <input type="password" id="password-confirm" name="password-confirm" class="form-control"
+                   placeholder="Confirm Password"
+                   required/>
+            <label class="sr-only" for="password-confirm">Confirm Password</label>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">Sign Up</button>
+    </form>
+</div>
 </body>
 </html>

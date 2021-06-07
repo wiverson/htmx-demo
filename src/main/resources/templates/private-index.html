@@ -9,30 +9,12 @@
 </head>
 <body>
 <section layout:fragment="content">
+    <div class="container">
+        Welcome <span sec:authentication="name"></span>!
+    </div>
 
-    <div sec:authentication="name">
-        The value of the "name" property of the authentication object should appear here.
-    </div>
-
-    <div class="container"><br/>
-        <div class="alert alert-success">
-            <strong>If this looks ok...</strong> Bootstrap is working.
-        </div>
-    </div>
     <div class="container">
-        <a th:href="@{click-to-edit}">Click To Edit</a>
-    </div>
-    <div class="container">
-        <a th:href="@{infinite-scroll}">Infinite Scroll</a>
-    </div>
-    <div class="container">
-        <a th:href="@{todo}">To Do</a>
-    </div>
-    <div class="container">
-        <a th:href="@{input}">Input Catalog (Widgets)</a>
-    </div>
-    <div class="container">
-        <a th:href="@{value-select}">Value Select</a>
+        <a href="/logout">Logout</a>
     </div>
 </section>
 </body>
