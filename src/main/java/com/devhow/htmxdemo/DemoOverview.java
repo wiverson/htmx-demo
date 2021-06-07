@@ -1,4 +1,4 @@
-package com.devhow.htmxdemo.demo;
+package com.devhow.htmxdemo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

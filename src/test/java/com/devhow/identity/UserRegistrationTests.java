@@ -2,8 +2,8 @@ package com.devhow.identity;
 
 import com.devhow.identity.entity.User;
 import com.devhow.identity.entity.UserValidation;
+import com.devhow.identity.user.IdentityServiceException;
 import com.devhow.identity.user.UserService;
-import com.devhow.identity.user.error.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class UserRegistrationTests {
         String pass = "this-is-just-a-test";
         String username = "wiverson+" + random.nextInt() + "@gmail.com";
 
-        assertThrows(BadLoginException.class, () -> userService.signIn(username, pass));
+        assertThrows(IdentityServiceException.class, () -> userService.signIn(username, pass));
 
         User signedUpUser = userService.signUpUser(username, pass, true);
 
@@ -89,7 +89,7 @@ public class UserRegistrationTests {
 
         // This is the key flow here - if a user tries to sign up again but is already confirmed,
         // the returned user will show up as isEnabled.
-        assertThrows(BadEmailException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                 userService.signUpUser(username, password, true));
     }
 
@@ -97,14 +97,14 @@ public class UserRegistrationTests {
      * Invalid token path
      */
     @Test
-    public void InvalidToken() throws BadPasswordException, BadEmailException, AuthenticationFailedException {
+    public void InvalidToken() throws IdentityServiceException, AuthenticationFailedException {
         String username = "wiverson+" + random.nextInt() + "@gmail.com";
         String pass = "test-is-just-for-a-test";
 
         user = userService.signUpUser(username, pass, true);
         assertThat(user.validated()).isFalse();
 
-        assertThrows(BadTokenException.class, () -> userService.confirmUser("garbage token"));
+        assertThrows(IdentityServiceException.class, () -> userService.confirmUser("garbage token"));
 
         user = userService.findUser(user.getUsername()).orElseThrow();
         assertThat(user.validated()).isFalse();
@@ -115,13 +115,13 @@ public class UserRegistrationTests {
      */
     @Test()
     public void InvalidEmailAddress() {
-        assertThrows(BadEmailException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                 user = userService.signUpUser("garbage email", "test-this-is-just-for-testing", true));
-        assertThrows(BadEmailException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                 user = userService.signUpUser("", "test-this-is-just-for-testing", true));
-        assertThrows(BadEmailException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                 user = userService.signUpUser("a", "test-this-is-just-for-testing", true));
-        assertThrows(BadEmailException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                 user = userService.signUpUser("a.c", "test-this-is-just-for-testing", true));
     }
 
@@ -130,15 +130,15 @@ public class UserRegistrationTests {
      */
     @Test
     public void InvalidPassword() {
-        assertThrows(BadPasswordException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                         userService.signUpUser("wiverson+test@gmail.com", "", true),
                 "Empty password");
 
-        assertThrows(BadPasswordException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                         userService.signUpUser("wiverson+test@gmail.com", "123", true),
                 "Too short password");
 
-        assertThrows(BadPasswordException.class, () ->
+        assertThrows(IdentityServiceException.class, () ->
                         userService.signUpUser("wiverson+test@gmail.com", "299 929 2929", true),
                 "Password has spaces");
     }
@@ -147,7 +147,7 @@ public class UserRegistrationTests {
      * Expired token
      */
     @Test
-    public void ExpiredToken() throws BadPasswordException, BadEmailException, AuthenticationFailedException {
+    public void ExpiredToken() throws IdentityServiceException, AuthenticationFailedException {
         user = userService.signUpUser("wiverson+" + random.nextInt() + "@gmail.com", "test-is-just-for-a-test", true);
         assertThat(user.validated()).isFalse();
 
@@ -161,7 +161,7 @@ public class UserRegistrationTests {
 
         userService.update(userValidation);
 
-        assertThrows(BadTokenException.class, () -> userService.confirmUser(userService.validation(user).getToken()));
+        assertThrows(IdentityServiceException.class, () -> userService.confirmUser(userService.validation(user).getToken()));
 
         assertThat(userService.findUser(user.getUsername()).orElseThrow().validated()).isFalse();
     }
@@ -172,12 +172,12 @@ public class UserRegistrationTests {
         String username = "wiverson+" + random.nextInt() + "@gmail.com";
 
         // password reset is requested but email doesn't exist
-        assertThrows(BadPasswordResetRequestException.class, () -> userValidation = userService.requestPasswordReset(user.getUsername()));
+        assertThrows(IdentityServiceException.class, () -> userValidation = userService.requestPasswordReset(user.getUsername()));
 
         user = userService.signUpUser(username, startingPassword, true);
 
         // password reset is requested but token has not been validated
-        assertThrows(BadTokenException.class, () -> userService.requestPasswordReset(user.getUsername()));
+        assertThrows(IdentityServiceException.class, () -> userService.requestPasswordReset(user.getUsername()));
 
         userService.signIn(user.getUsername(), startingPassword);
 
@@ -197,13 +197,13 @@ public class UserRegistrationTests {
 
         String newPassword = "this-is-a-fancy-new-password";
 
-        assertThrows(BadLoginException.class, () -> userService.signIn(user.getUsername(), newPassword));
+        assertThrows(IdentityServiceException.class, () -> userService.signIn(user.getUsername(), newPassword));
         user = userService.signIn(user.getUsername(), startingPassword);
 
         user = userService.updatePassword(user.getUsername(), userValidation.getPasswordResetToken(), newPassword);
         assertThat(user.getPassword()).contains(BCRYPT_TOKEN);
 
-        assertThrows(BadLoginException.class, () -> userService.signIn(user.getUsername(), startingPassword));
+        assertThrows(IdentityServiceException.class, () -> userService.signIn(user.getUsername(), startingPassword));
         userService.signIn(user.getUsername(), newPassword);
     }
 }

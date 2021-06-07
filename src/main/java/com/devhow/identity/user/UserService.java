@@ -2,7 +2,6 @@ package com.devhow.identity.user;
 
 import com.devhow.identity.entity.User;
 import com.devhow.identity.entity.UserValidation;
-import com.devhow.identity.user.error.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.AuthenticationFailedException;
 import java.util.Optional;
+
+import static com.devhow.identity.user.IdentityServiceException.Reason.*;
 
 @Service
 public class UserService {
@@ -67,51 +68,51 @@ public class UserService {
     }
 
 
-    private void checkEmailAddress(String address) throws BadEmailException {
+    private void checkEmailAddress(String address) throws IdentityServiceException {
         // Really, really basic validation to ensure the email address has an @ symbol that's not at the start or end
         if (!address.contains("@"))
-            throw new BadEmailException("Invalid email address (1)");
+            throw new IdentityServiceException(BAD_EMAIL, "Invalid email address (1)");
         if (address.endsWith("@"))
-            throw new BadEmailException("Invalid email address (2)");
+            throw new IdentityServiceException(BAD_EMAIL, "Invalid email address (2)");
         if (address.startsWith("@"))
-            throw new BadEmailException("Invalid email address (3)");
+            throw new IdentityServiceException(BAD_EMAIL, "Invalid email address (3)");
         if (address.length() < 5)
-            throw new BadEmailException("Invalid email address (4)");
+            throw new IdentityServiceException(BAD_EMAIL, "Invalid email address (4)");
         if (!address.contains("."))
-            throw new BadEmailException("Invalid email address (5)");
+            throw new IdentityServiceException(BAD_EMAIL, "Invalid email address (5)");
     }
 
-    private void checkPassword(String password) throws BadPasswordException {
+    private void checkPassword(String password) throws IdentityServiceException {
         if (password == null)
-            throw new BadPasswordException("No password set.");
+            throw new IdentityServiceException(BAD_PASSWORD, "No password set.");
 
         if (password.length() < 12)
-            throw new BadPasswordException("Password is too short.");
+            throw new IdentityServiceException(BAD_PASSWORD, "Password is too short.");
 
         if (password.length() > 200)
-            throw new BadPasswordException("Password is too long.");
+            throw new IdentityServiceException(BAD_PASSWORD, "Password is too long.");
 
         if (!password.trim().equals(password))
-            throw new BadPasswordException("No spaces in password.");
+            throw new IdentityServiceException(BAD_PASSWORD, "No spaces in password.");
 
         if (password.contains(" "))
-            throw new BadPasswordException("No spaces in password.");
+            throw new IdentityServiceException(BAD_PASSWORD, "No spaces in password.");
 
         String clean = password.replaceAll("[^\\n\\r\\t\\p{Print}]", "");
         if (!password.equals(clean))
-            throw new BadPasswordException("No non-printable characters in password.");
+            throw new IdentityServiceException(BAD_PASSWORD, "No non-printable characters in password.");
     }
 
-    public User signIn(String username, String pass) throws BadLoginException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new BadLoginException("Unknown Email"));
+    public User signIn(String username, String pass) throws IdentityServiceException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new IdentityServiceException(BAD_LOGIN, "Unknown Email"));
 
         if (!passwordEncoder.matches(pass, user.getPassword()))
-            throw new BadLoginException("Invalid Login (1)");
+            throw new IdentityServiceException(BAD_LOGIN, "Invalid Login (1)");
 
         return user;
     }
 
-    public User signUpUser(String username, String pass, boolean isTest) throws BadPasswordException, AuthenticationFailedException, BadEmailException {
+    public User signUpUser(String username, String pass, boolean isTest) throws IdentityServiceException, AuthenticationFailedException {
 
         // First normalize user email
         checkEmailAddress(username);
@@ -121,7 +122,7 @@ public class UserService {
         Optional<User> foundUser = userRepository.findByUsername(username);
 
         if (foundUser.isPresent()) {
-            throw new BadEmailException("Email already exists.");
+            throw new IdentityServiceException(BAD_EMAIL, "Email already exists.");
         }
 
         User newUser = new User();
@@ -164,14 +165,14 @@ public class UserService {
         return user;
     }
 
-    public Optional<User> confirmUser(String confirmationToken) throws BadTokenException {
+    public Optional<User> confirmUser(String confirmationToken) throws IdentityServiceException {
 
-        UserValidation userValidation = userValidationRepository.findByToken(confirmationToken).orElseThrow(() -> new BadTokenException("Invalid Token (21)"));
+        UserValidation userValidation = userValidationRepository.findByToken(confirmationToken).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN, "Invalid Token (21)"));
 
-        User user = userRepository.findById(userValidation.getUser()).orElseThrow(BadTokenException::new);
+        User user = userRepository.findById(userValidation.getUser()).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN, "Invalid Token (22)"));
 
         if (!validation(user).tokenIsCurrent())
-            throw new BadTokenException("");
+            throw new IdentityServiceException(BAD_TOKEN, "");
 
         user.markTokenAsValid();
         User savedUser = userRepository.save(user);
@@ -191,16 +192,15 @@ public class UserService {
         return userValidationRepository.save(userValidation);
     }
 
-    public UserValidation requestPasswordReset(String username) throws BadPasswordResetRequestException,
-            BadTokenException, AuthenticationFailedException {
+    public UserValidation requestPasswordReset(String username) throws IdentityServiceException, AuthenticationFailedException {
         User user = userRepository.findByUsername(username).orElseThrow(()
-                -> new BadPasswordResetRequestException("Missing email address. (a)"));
+                -> new IdentityServiceException(BAD_PASSWORD_RESET, "Missing email address. (a)"));
 
         if (!user.validated())
-            throw new BadTokenException("User never activated (should resend activation email)");
+            throw new IdentityServiceException(BAD_TOKEN, "User never activated (should resend activation email)");
 
         UserValidation uv = userValidationRepository.findById(user.getId()).orElseThrow(()
-                -> new BadPasswordResetRequestException("No validation token found. (b)"));
+                -> new IdentityServiceException(BAD_PASSWORD_RESET, "No validation token found. (b)"));
 
         if (uv.getPasswordResetIssue() != null)
             if (uv.passwordValidationIsCurrent()) {
@@ -215,16 +215,16 @@ public class UserService {
         return uv;
     }
 
-    public User updatePassword(String username, String passwordResetToken, String newPassword) throws BadPasswordResetRequestException {
+    public User updatePassword(String username, String passwordResetToken, String newPassword) throws IdentityServiceException {
         User user = userRepository.findByUsername(username).orElseThrow(() ->
-                new BadPasswordResetRequestException("No user found with this email. (c)"));
+                new IdentityServiceException(BAD_PASSWORD_RESET, "No user found with this email. (c)"));
         UserValidation userValidation = userValidationRepository.findById(user.getId()).orElseThrow(()
-                -> new BadPasswordResetRequestException("No user validation token[s] found. (d)"));
+                -> new IdentityServiceException(BAD_PASSWORD_RESET, "No user validation token[s] found. (d)"));
 
         if (!userValidation.getPasswordResetToken().equals(passwordResetToken))
-            throw new BadPasswordResetRequestException("Invalid/expired token. (e)");
+            throw new IdentityServiceException(BAD_PASSWORD_RESET, "Invalid/expired token. (e)");
         if (!userValidation.passwordValidationIsCurrent())
-            throw new BadPasswordResetRequestException("Token expired. (f)");
+            throw new IdentityServiceException(BAD_PASSWORD_RESET, "Token expired. (f)");
 
         user.setPassword(passwordEncoder.encode(newPassword));
 

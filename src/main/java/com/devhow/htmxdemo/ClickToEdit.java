@@ -1,4 +1,4 @@
-package com.devhow.htmxdemo.demo;
+package com.devhow.htmxdemo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/click-to-edit")
+@RequestMapping("/public/click-to-edit")
 public class ClickToEdit {
 
     @GetMapping

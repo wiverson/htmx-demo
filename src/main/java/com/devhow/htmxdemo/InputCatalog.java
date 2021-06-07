@@ -1,4 +1,4 @@
-package com.devhow.htmxdemo.demo;
+package com.devhow.htmxdemo;
 
 import j2html.tags.ContainerTag;
 import org.springframework.http.MediaType;
@@ -17,7 +17,7 @@ import java.util.Map;
 import static j2html.TagCreator.*;
 
 @Controller
-@RequestMapping("/input")
+@RequestMapping("/public/input")
 public class InputCatalog {
 
     @GetMapping

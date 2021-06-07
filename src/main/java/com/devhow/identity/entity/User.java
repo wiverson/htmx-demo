@@ -51,18 +51,15 @@ public class User {
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(id.toString()));
         grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-        //System.out.println("Looking for " + this.toString());
         return new org.springframework.security.core.userdetails.User(this.getUsername(), this.getPassword(), grantedAuthorities);
     }
 
     @Column(name = "pass")
     public String getPassword() {
-        //System.out.println("get pass->" + password + " for " + username);
         return password;
     }
 
     public void setPassword(String pass) {
-        //System.out.println("set pass->" + pass + " for " + username);
         this.password = pass;
     }
 

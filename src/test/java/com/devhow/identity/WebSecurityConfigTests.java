@@ -3,7 +3,7 @@ package com.devhow.identity;
 
 import com.devhow.identity.entity.User;
 import com.devhow.identity.user.UserService;
-import com.devhow.identity.user.error.IdentityServiceException;
+import com.devhow.identity.user.IdentityServiceException;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

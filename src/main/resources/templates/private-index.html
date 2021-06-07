@@ -1,31 +1,38 @@
 <!doctype html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
-    <title>Hello World</title>
+    <title>Private Index</title>
 </head>
 <body>
 <section layout:fragment="content">
+
+    <div sec:authentication="name">
+        The value of the "name" property of the authentication object should appear here.
+    </div>
+
     <div class="container"><br/>
         <div class="alert alert-success">
             <strong>If this looks ok...</strong> Bootstrap is working.
         </div>
     </div>
     <div class="container">
-        <a th:href="@{/public/click-to-edit}">Click To Edit</a>
+        <a th:href="@{click-to-edit}">Click To Edit</a>
     </div>
     <div class="container">
-        <a th:href="@{/public/infinite-scroll}">Infinite Scroll</a>
+        <a th:href="@{infinite-scroll}">Infinite Scroll</a>
     </div>
     <div class="container">
-        <a th:href="@{/public/todo}">To Do</a>
+        <a th:href="@{todo}">To Do</a>
     </div>
     <div class="container">
-        <a th:href="@{/public/input}">Input Catalog (Widgets)</a>
+        <a th:href="@{input}">Input Catalog (Widgets)</a>
     </div>
     <div class="container">
-        <a th:href="@{/public/value-select}">Value Select</a>
+        <a th:href="@{value-select}">Value Select</a>
     </div>
 </section>
 </body>

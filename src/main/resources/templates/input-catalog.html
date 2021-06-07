@@ -49,7 +49,7 @@
             <h3>Core UI</h3>
 
             <div class="mb-3">
-                <input class="btn btn-primary" hx-post="/input/button" hx-swap="beforeend" hx-target="#event"
+                <input class="btn btn-primary" hx-post="/public/input/button" hx-swap="beforeend" hx-target="#event"
                        hx-trigger="click" hx-vals='{"demo-button": "Cool Blue Button"}' id="demo-button"
                        name="demo-button" type="button" value="Button">
             </div>
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="mb-3 col">
                     <input checked
-                           class="form-check-input" hx-post="/input/checkbox" hx-swap="beforeend"
+                           class="form-check-input" hx-post="/public/input/checkbox" hx-swap="beforeend"
                            hx-target="#event" hx-trigger="click" id="demo-checkbox" name="demo-checkbox-1"
                            type="checkbox" hx-vals='{"checkbox": "demo-checkbox-1"}'>
                     <label for="demo-checkbox" class="form-label">Checkbox</label>
@@ -65,7 +65,7 @@
 
                 <div class="mb-3 col">
                     <input _="on load set my.indeterminate to true"
-                           class="form-check-input" hx-post="/input/checkbox"
+                           class="form-check-input" hx-post="/public/input/checkbox"
                            hx-swap="beforeend" hx-target="#event"
                            hx-trigger="click" hx-vals='{"checkbox": "demo-checkbox-2"}' id="indeterminate-checkbox"
                            name="demo-checkbox-2" type="checkbox" value="demo-checkbox-value-2">
@@ -78,14 +78,14 @@
                     <label class="form-label">Switch (Bootstrap Checkbox)
                         <input
                                 checked class="form-check-input"
-                                hx-post="/input/checkbox" hx-swap="beforeend" hx-target="#event"
+                                hx-post="/public/input/checkbox" hx-swap="beforeend" hx-target="#event"
                                 hx-trigger="click" hx-vals='{"checkbox": "demo-checkbox-switch"}'
                                 name="demo-checkbox-switch" type="checkbox" value="demo-checkbox-value">
                     </label>
                 </div>
             </div>
             <div class="mb-3">
-                <button class="btn btn-outline-dark px-3" hx-post="/input/button" hx-swap="beforeend" hx-target="#event"
+                <button class="btn btn-outline-dark px-3" hx-post="/public/input/button" hx-swap="beforeend" hx-target="#event"
                         hx-trigger="click" hx-vals='{"demo-button": "SVG Font Icon Button"}' type="button">
                     <i class="bi bi-bag-check-fill clickable-icon"
                        style="font-size: 1.5rem; color: #0C6EFD;"
@@ -98,20 +98,20 @@
             <div class="mb-3">
                 <div class="form-check">
                     <label>Radio A
-                        <input checked class="form-check-input" hx-post="/input/radio"
+                        <input checked class="form-check-input" hx-post="/public/input/radio"
                                hx-swap="beforeend" hx-target="#event" hx-trigger="click"
                                id="demo-radio-a" name="demo-radio" type="radio" value="a">
                     </label>
                 </div>
                 <div class="form-check">
                     <label>Radio B
-                        <input hx-post="/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
+                        <input hx-post="/public/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
                                id="demo-radio-b" class="form-check-input" type="radio" name="demo-radio" value="b">
                     </label>
                 </div>
                 <div class="form-check">
                     <label>Radio C
-                        <input hx-post="/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
+                        <input hx-post="/public/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
                                id="demo-radio-c" class="form-check-input" type="radio" name="demo-radio" value="c">
                     </label>
                 </div>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="col">
                     <input id="demo-slider" type="range" class="form-range" name="demo-range" min="0" max="100"
-                           hx-post="/input/slider" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
+                           hx-post="/public/input/slider" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
                            _="on load or input set #slider-value.innerText to my.value">
                 </div>
                 <div class="col-sm-1">
@@ -136,7 +136,7 @@
                 </div>
                 <div class="col">
                     <select id="demo-single-select" class="form-select"
-                            hx-post="/input/select-single" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                            hx-post="/public/input/select-single" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                             name="demo-select-single">
                         <option selected>Open this select menu</option>
                         <option value="1">One</option>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="col">
                     <select id="demo-select-multiple" class="form-select" multiple size="3"
-                            hx-post="/input/select-multiple" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                            hx-post="/public/input/select-multiple" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                             name="demo-select-multiple">
                         <option value="1" selected>One</option>
                         <option value="2">Two</option>
@@ -170,7 +170,7 @@
                     <label class="form-label">Date
 
                         <input
-                                hx-post="/input/date" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                                hx-post="/public/input/date" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                                 type="date" class="form-control" name="demo-date">
                     </label>
                 </div>
@@ -178,7 +178,7 @@
                 <div class="col">
                     <label class="form-label">Time
                         <input
-                                hx-post="/input/time" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                                hx-post="/public/input/time" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                                 class="form-control" type="time" name="demo-time">
                     </label>
                 </div>
@@ -186,7 +186,7 @@
                 <div class="col">
                     <label class="form-label">Date/Time (Local)
                         <input
-                                hx-post="/input/datetime" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                                hx-post="/public/input/datetime" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                                 type="datetime-local" class="form-control" name="demo-date-time-local">
                     </label>
                 </div>
@@ -198,13 +198,13 @@
             <div class="mb-3 input-group">
                 <label class="input-group-text" for="demo-color">Color</label>
                 <input type="color" style="height: 2.5em; width: 3em" id="demo-color"
-                       hx-post="/input/color" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/color" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                        name="demo-color" value="#0000FF">
             </div>
 
             <div class="mb-3">
                 <input type="file" class="form-control" name="demo-file"
-                       hx-post="/input/file" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/file" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                        hx-encoding="multipart/form-data"
                 >
             </div>
@@ -212,7 +212,7 @@
             <div class="mb-3 input-group">
                 <label class="input-group-text" for="demo-number">Number</label>
                 <input type="number" id="demo-number"
-                       hx-post="/input/number" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/number" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                        class="form-control" name="demo-number" min="0" max="100">
             </div>
 
@@ -221,7 +221,7 @@
             <div class="mb-3 form-floating">
                 <input id="demo-text-single" class="form-control" type="text" placeholder="Text"
                        name="demo-single-string"
-                       hx-post="/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                 >
                 <label class="form-label" for="demo-text-single">Text (Single)</label>
             </div>
@@ -229,7 +229,7 @@
             <div class="mb-3 form-floating">
                 <textarea id="demo-text-multiple" class="form-control" rows="3" placeholder="Text"
                           name="demo-multi-string"
-                          hx-post="/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                          hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                           style="height: 8em"></textarea>
                 <label class="form-label" for="demo-text-multiple">Text (Multi-line)</label>
             </div>
@@ -241,14 +241,14 @@
 
             <div class="form-floating mb-3">
                 <input type="email" class="form-control" id="demo-email" name="demo-email"
-                       hx-post="/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                        placeholder="name@example.com">
                 <label class="form-label" for="demo-email">Email</label>
             </div>
 
             <div class="form-floating mb-3">
                 <input type="password" id="demo-password" class="form-control" name="demo-password"
-                       hx-post="/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                        placeholder="Password">
                 <label class="form-label" for="demo-password">Password</label>
             </div>
@@ -256,7 +256,7 @@
             <div class="mb-3 form-floating">
                 <input type="tel" id="demo-tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                        name="demo-tel"
-                       hx-post="/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                        placeholder="123-456-7890">
                 <label class="form-label" for="demo-tel">Telephone</label>
             </div>
@@ -266,7 +266,7 @@
             <div class="form-floating mb-3">
                 <input class="form-control" id="demo-search" type="search"
                        name="demo-search"
-                       hx-post="/input/text" hx-swap="beforeend" hx-target="#event"
+                       hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event"
                        hx-trigger="keyup changed delay:500ms"
                        placeholder="Search">
                 <label class="form-label" for="demo-search">Search</label>
@@ -275,7 +275,7 @@
             <div class="mb-3 form-floating">
                 <input id="demo-url" class="form-control" type="url" placeholder="URL"
                        name="demo-url"
-                       hx-post="/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
+                       hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change"
                 >
                 <label for="demo-url" class="form-label">URL</label>
             </div>
@@ -287,13 +287,13 @@
 
             <div class="mb-3">
                 <input class="btn btn-danger form-control" type="reset"
-                       hx-post="/input/reset" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
+                       hx-post="/public/input/reset" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
                        _="on click set #indeterminate-checkbox.indeterminate to true">
             </div>
 
             <div class="mb-3">
                 <input
-                        hx-post="/input/submit" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
+                        hx-post="/public/input/submit" hx-swap="beforeend" hx-target="#event" hx-trigger="click"
                         class="btn btn-primary form-control" type="submit">
             </div>
 

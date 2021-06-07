@@ -25,6 +25,22 @@
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-security</artifactId>
+                    <!-- Remove noise from build introduced by Spring 2.5.0 -->
+                    <!-- https://stackoverflow.com/questions/67630048/springboot-2-5-0-for-jackson-kotlin-classes-support-please-add-com-fasterxml-ja -->
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-stdlib-jdk8</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-stdlib</artifactId>
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-reflect</artifactId>
+                        </exclusion>
+                    </exclusions>
                 </dependency>
                 <dependency>
                     <groupId>org.thymeleaf.extras</groupId>
@@ -142,7 +158,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator-core</artifactId>
-            <version>0.46</version>
+            <version>0.47</version>
         </dependency>
         <dependency>
             <groupId>org.webjars.npm</groupId>

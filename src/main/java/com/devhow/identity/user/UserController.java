@@ -1,16 +1,15 @@
 package com.devhow.identity.user;
 
 import com.devhow.identity.entity.User;
-import com.devhow.identity.user.error.BadEmailException;
-import com.devhow.identity.user.error.BadPasswordException;
-import com.devhow.identity.user.error.BadPasswordResetRequestException;
-import com.devhow.identity.user.error.BadTokenException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.AuthenticationFailedException;
 import java.util.Date;
+
+import static com.devhow.identity.user.IdentityServiceException.Reason.BAD_PASSWORD_RESET;
+import static com.devhow.identity.user.IdentityServiceException.Reason.BAD_TOKEN;
 
 @Controller
 @RequestMapping("/public")
@@ -62,10 +61,10 @@ public class UserController {
 
         try {
             if (password1.compareTo(password2) != 0)
-                throw new BadPasswordResetRequestException("Passwords don't match");
+                throw new IdentityServiceException(BAD_PASSWORD_RESET, "Passwords don't match");
             userService.updatePassword(email, key, password1);
             return signIn("", "Password successfully updated.", modelMap);
-        } catch (BadPasswordResetRequestException e) {
+        } catch (IdentityServiceException e) {
             modelMap.addAttribute(MESSAGE, e.getMessage());
         }
         return signIn("", "", modelMap);
@@ -82,10 +81,11 @@ public class UserController {
         try {
             userService.requestPasswordReset(email);
             return signIn("", "Check your email for password reset link.", modelMap);
-        } catch (BadPasswordResetRequestException e) {
-            modelMap.addAttribute(MESSAGE, e.getMessage());
-        } catch (BadTokenException e) {
-            modelMap.addAttribute(MESSAGE, "Unknown Token");
+        } catch (IdentityServiceException e) {
+            if (e.getReason().equals(BAD_TOKEN))
+                modelMap.addAttribute(MESSAGE, "Unknown Token");
+            else
+                modelMap.addAttribute(MESSAGE, e.getMessage());
         } catch (AuthenticationFailedException authenticationFailedException) {
             modelMap.addAttribute(MESSAGE, "Unable to send email right now...");
         }
@@ -104,7 +104,7 @@ public class UserController {
         try {
             userService.signUpUser(user.getUsername(), user.getPassword(), false);
             return "redirect:/public/sign-in?message=Check%20your%20email%20to%20confirm%20your%20account%21";
-        } catch (BadEmailException | BadPasswordException e) {
+        } catch (IdentityServiceException e) {
             modelMap.addAttribute(ERROR, "Bad Sign Up");
         } catch (AuthenticationFailedException authenticationFailedException) {
             modelMap.addAttribute(ERROR, "Can't send email - email server is down/unreachable.");
@@ -116,9 +116,9 @@ public class UserController {
     @GetMapping("/sign-up/confirm")
     String confirmMail(@RequestParam("token") String token, ModelMap modelMap) {
         try {
-            userService.confirmUser(token).orElseThrow(BadTokenException::new);
+            userService.confirmUser(token).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN));
             return signIn("", "Confirmed!", modelMap);
-        } catch (BadTokenException e) {
+        } catch (IdentityServiceException e) {
             return signIn("", "Unknown Token", modelMap);
         }
     }

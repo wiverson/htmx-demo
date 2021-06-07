@@ -12,7 +12,7 @@
             Click To Edit demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
     </div>
     <div class="container">
-        <form hx-post="/click-to-edit/edit/1" hx-target="this" hx-swap="outerHTML">
+        <form hx-post="/public/click-to-edit/edit/1" hx-target="this" hx-swap="outerHTML">
             <div><label>First Name</label>: <span th:text="${contact.firstName}"></span></div>
             <div><label>Last Name</label>: <span th:text="${contact.lastName}"></span></div>
             <div><label>Email</label>: <span th:text="${contact.email}"></span></div>

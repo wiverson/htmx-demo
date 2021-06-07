@@ -1,4 +1,4 @@
-package com.devhow.htmxdemo.demo;
+package com.devhow.htmxdemo;
 
 import com.github.javafaker.Faker;
 
