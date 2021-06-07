@@ -16,7 +16,7 @@ public class EmailSenderService {
     private final JavaMailSender javaMailSender;
 
     @Value("${mail.test:false}")
-    private final Boolean mailTest = false;
+    private Boolean mailTest = false;
 
     public EmailSenderService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -25,9 +25,15 @@ public class EmailSenderService {
     @Async
     public void sendEmail(SimpleMailMessage email) {
         if (mailTest) {
-            logger.info(email.getText());
+            logger.error(email.getText());
         } else {
-            javaMailSender.send(email);
+            try {
+                javaMailSender.send(email);
+            } catch (Exception e) {
+                logger.error("Unable to send email! Future emails will be logged - no retry!", e);
+                mailTest = true;
+                logger.error(email.getText());
+            }
         }
     }
 }
