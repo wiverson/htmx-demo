@@ -54,10 +54,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     //.successHandler(userService)
                     .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/public/logout"))
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/?message=logout")
                     .deleteCookies("JSESSIONID");
 //                .and()
 //                    .anonymous();

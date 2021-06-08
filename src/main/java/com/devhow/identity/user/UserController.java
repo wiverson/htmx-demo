@@ -4,8 +4,10 @@ import com.devhow.identity.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.mail.AuthenticationFailedException;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 import static com.devhow.identity.user.IdentityServiceException.Reason.BAD_PASSWORD_RESET;
@@ -32,6 +34,12 @@ public class UserController {
         return "OK " + new Date().toString();
     }
 
+    @RequestMapping(path = "/logout")
+    public RedirectView logout(HttpServletResponse response) {
+        response.addHeader("HX-Redirect", "/");
+        return new RedirectView("/?message=logout");
+    }
+
     @PostMapping("/do-sign-in")
     public String doSignIn(@RequestParam(name = "error", defaultValue = "") String error, ModelMap modelMap) {
         if (error.length() > 0)
@@ -41,11 +49,14 @@ public class UserController {
     }
 
     @GetMapping("/sign-in")
-    String signIn(@RequestParam(name = "error", defaultValue = "") String error, @RequestParam(name = "message", defaultValue = "") String message, ModelMap modelMap) {
+    String signIn(@RequestParam(name = "error", defaultValue = "") String error,
+                  @RequestParam(name = "message", defaultValue = "") String message, ModelMap modelMap,
+                  HttpServletResponse response) {
         if (message.length() > 0)
             modelMap.addAttribute(MESSAGE, message);
         if (error.length() > 0)
             modelMap.addAttribute(ERROR, "Invalid Login");
+        response.addHeader("HX-Redirect", "/");
         return "identity/sign-in";
     }
 
@@ -57,17 +68,19 @@ public class UserController {
 
     @PostMapping("/password-reset")
     String updatePassword(@RequestParam(name = "key") String key, @RequestParam(name = "email") String email,
-                          @RequestParam(name = "password1") String password1, @RequestParam(name = "password2") String password2, ModelMap modelMap) {
+                          @RequestParam(name = "password1") String password1,
+                          @RequestParam(name = "password2") String password2, ModelMap modelMap,
+                          HttpServletResponse response) {
 
         try {
             if (password1.compareTo(password2) != 0)
                 throw new IdentityServiceException(BAD_PASSWORD_RESET, "Passwords don't match");
             userService.updatePassword(email, key, password1);
-            return signIn("", "Password successfully updated.", modelMap);
+            return signIn("", "Password successfully updated.", modelMap, response);
         } catch (IdentityServiceException e) {
             modelMap.addAttribute(MESSAGE, e.getMessage());
         }
-        return signIn("", "", modelMap);
+        return signIn("", "", modelMap, response);
     }
 
     @GetMapping("/forgot-password")
@@ -76,11 +89,12 @@ public class UserController {
     }
 
     @PostMapping("/forgot-password")
-    String resetPassword(@RequestParam(name = "email", defaultValue = "") String email, ModelMap modelMap) {
+    String resetPassword(@RequestParam(name = "email", defaultValue = "") String email,
+                         ModelMap modelMap, HttpServletResponse response) {
 
         try {
             userService.requestPasswordReset(email);
-            return signIn("", "Check your email for password reset link.", modelMap);
+            return signIn("", "Check your email for password reset link.", modelMap, response);
         } catch (IdentityServiceException e) {
             if (e.getReason().equals(BAD_TOKEN))
                 modelMap.addAttribute(MESSAGE, "Unknown Token");
@@ -114,12 +128,12 @@ public class UserController {
     }
 
     @GetMapping("/sign-up/confirm")
-    String confirmMail(@RequestParam("token") String token, ModelMap modelMap) {
+    String confirmMail(@RequestParam("token") String token, ModelMap modelMap, HttpServletResponse response) {
         try {
             userService.confirmUser(token).orElseThrow(() -> new IdentityServiceException(BAD_TOKEN));
-            return signIn("", "Email Address Confirmed!", modelMap);
+            return signIn("", "Email Address Confirmed!", modelMap, response);
         } catch (IdentityServiceException e) {
-            return signIn("", "Unknown Token", modelMap);
+            return signIn("", "Unknown Token", modelMap, response);
         }
     }
 }

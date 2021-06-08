@@ -2,8 +2,8 @@ package com.devhow.identity;
 
 
 import com.devhow.identity.entity.User;
-import com.devhow.identity.user.UserService;
 import com.devhow.identity.user.IdentityServiceException;
+import com.devhow.identity.user.UserService;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -28,12 +28,7 @@ public class WebSecurityConfigTests {
 
     private final TestRestTemplate restTemplate = new TestRestTemplate();
     private final String[] publicURLs = new String[]{"/", "/public/sign-in", "/public/forgot-password", "/public/sign-up", "/public/ping"};
-    private final String[] loginRequiredURLs = new String[]{"/private/app/list",
-            "/private/app/details?appId=96",
-            "/private/app/keys?appId=96",
-            "/private/installer/list?appId=96",
-            "/private/installer/installer?installerId=731"
-    };
+    private final String[] loginRequiredURLs = new String[]{"/private/"};
     @Autowired
     UserService userService;
     @Autowired
@@ -60,7 +55,6 @@ public class WebSecurityConfigTests {
     }
 
     @Test
-    @Disabled("Need to add secure pages back in to app")
     public void basicLockAccessChecks() {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
@@ -70,7 +64,7 @@ public class WebSecurityConfigTests {
                     createURLWithPort(privateURL),
                     HttpMethod.GET, entity, String.class);
 
-            assertThat(response.getStatusCode().value()).isEqualTo(302).describedAs(privateURL);
+            assertThat(response.getBody()).contains("Sign In").describedAs(privateURL);
         }
     }
 

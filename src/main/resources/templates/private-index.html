@@ -15,7 +15,11 @@
 
     <div class="container">
         <a href="/logout">Logout</a>
+        <button hx-get="/private/data" hx-target="#data" hx-swap="innerHTML">Get Data</button>
+        <button hx-get="/public/logout" hx-swap="none">Logout Session</button>
+        <div id="data"></div>
     </div>
+
 </section>
 </body>
 </html>
