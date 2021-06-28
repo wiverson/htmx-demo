@@ -13,17 +13,23 @@
     </div>
     <div class="container">
         <div>
-            <label>Make</label>
-            <select name="make" hx-get="/value-select/models" hx-target="#models" hx-indicator=".htmx-indicator">
-                <option value="audi">Audi</option>
-                <option value="toyota">Toyota</option>
-                <option value="bmw">BMW</option>
+            <label>Java version</label>
+            <select name="make" hx-get="/public/value-select/models" hx-target="#models" hx-indicator=".htmx-indicator">
+                <option value="java8">8</option>
+                <option value="java9">9</option>
+                <option value="java10">10</option>
+                <option value="java11">11</option>
+                <option value="java12">12</option>
+                <option value="java13">13</option>
+                <option value="java14">14</option>
+                <option value="java15">15</option>
+                <option value="java16">16</option>
             </select>
-        </div>
-        <div>
-            <label>Model</label>
+            <label>has key new features</label>
             <select id="models" name="model">
-                <option value="a1">A1</option>
+                <option value="lambdas">lambdas</option>
+                <option value="collections">collections</option>
+                <option value="streams">streams</option>
             </select>
         </div>
     </div>

@@ -1,4 +1,4 @@
-package com.devhow.htmxdemo.demo;
+package com.devhow.htmxdemo;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,7 @@ import java.util.Date;
 import static j2html.TagCreator.*;
 
 @Controller
-@RequestMapping("/todo")
+@RequestMapping("/public/todo")
 public class ToDoList {
 
     @GetMapping
@@ -39,7 +39,7 @@ public class ToDoList {
                         .attr("hx-confirm", "Are you sure?")
                         .attr("hx-target", "closest tr")
                         .attr("hx-swap", "outerHTML swap:1s")
-                        .attr("hx-delete", "/todo/delete")
+                        .attr("hx-delete", "/public/todo/delete")
                         .attr("hx-trigger", "click")
                         .withClasses("btn", "btn-danger")
                 )

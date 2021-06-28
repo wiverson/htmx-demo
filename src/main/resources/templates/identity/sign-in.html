@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sign In</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Bootstrap CSS-->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <!--Bootstrap JS-->
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<section class="full-center">
+    <div class="container">
+        <form class="form-signin" role="form" action="/public/do-sign-in" method="POST" accept-charset="utf-8">
+            <div class="mt-4 mb-4"><a href="/"><img class="img-responsive center-block d-block mx-auto"
+                                                    src="/public/logo.png" width="72" height="72"
+                                                    alt="Demo App"></a></div>
+
+            <div th:if="${message}" class="alert alert-primary" role="alert">
+                <span th:text="${message}"></span>
+            </div>
+            <div th:if="${error}" class="alert alert-danger" role="alert">
+                <span th:text="${error}"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" id="username" name="username" class="form-control" placeholder="name@example.com"
+                       required autofocus/>
+                <label class="form-label" for="username">Email</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                       required/>
+                <label class="form-label" for="password">Password</label>
+            </div>
+
+            <div class="container-fluid text-center">
+                <button class="btn btn-primary w-100" type="submit">Sign In</button>
+            </div>
+            <div class="row justify-content-around mt-2">
+                <div class="col-4 text-center"><a class="link-secondary" th:href="@{/public/forgot-password}">Forgot
+                    Password?</a>
+                </div>
+                <div class="col-4 text-center"><a class="link-secondary" th:href="@{/public/sign-up}">Sign
+                    Up?</a></div>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>
