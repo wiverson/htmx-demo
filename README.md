@@ -38,7 +38,6 @@ You can add the WebJars for [htmx](https://htmx.org/) and [hyperscript](https://
 this:
 
 ```xml
-
 <dependencies>
     <dependency>
         <groupId>org.webjars.npm</groupId>
@@ -56,7 +55,6 @@ this:
 ...and then add the following to your application Thymeleaf/HTML to use htmx & hyperscript:
 
 ```xml
-
 <head>
     <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/hyperscript.org/dist/_hyperscript.js}"></script>
@@ -81,6 +79,27 @@ includes the line `<section layout:fragment="content">` which instructs the
 
 The application.yaml and logback.xml files are set up to dramatically reduce the log noise for a typical Spring Boot
 project.
+
+## Spring Security
+
+This project includes a demo illustrating the use of Spring Security with htmx. When you access a path with /private/
+Spring Security will send you to a login page. To create an account, use the sign up page and check the console for
+a link you can copy and paste into your browser.
+
+This implementation of Spring Security includes a pretty complete workflow for an email/password based user registration
+system. If you pop in a valid SMTP server into the configuration you will have a working:
+
+- User login
+- User sign up
+- User email validation
+- User forgot password/email reset
+- RDBMS backed store with properly salted & encrypted passwords
+
+You will find all of the Spring Security implementation details in the /htmx-demo/src/main/java/com/devhow/identity path.
+
+The main fancy feature involving htmx is that if a user is logged in to the app with two pages open - let's say page A and
+page B. If the user logs out on page A, the session is now invalid for page B. In this demo, page B will now correctly
+bounce to the login page if htmx requests any new data.
 
 ## Screenshots
 
