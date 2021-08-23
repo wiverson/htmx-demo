@@ -1,6 +1,7 @@
 package com.devhow.htmxdemo;
 
 import j2html.tags.ContainerTag;
+import j2html.tags.specialized.PTag;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +71,7 @@ public class InputCatalog {
     @PostMapping(path = "/select-multiple", produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String selectMultiple(@RequestParam("demo-select-multiple") String[] selection) {
-        ContainerTag p = p("Selected");
+        ContainerTag<PTag> p = p("Selected");
 
         for (String s : selection)
             p.with(span(" " + s));
@@ -134,7 +135,7 @@ public class InputCatalog {
     public String file(
             @RequestParam("demo-file") MultipartFile file,
             @RequestParam Map<String, String> parameters) {
-        ContainerTag p = p("File uploaded! ").with(join(br(),
+        ContainerTag<PTag> p = p("File uploaded! ").with(join(br(),
                 " File name: " + file.getName(), br(),
                 " File length: " + file.getSize() + " bytes", br(),
                 " File type: " + file.getContentType(), br(),
