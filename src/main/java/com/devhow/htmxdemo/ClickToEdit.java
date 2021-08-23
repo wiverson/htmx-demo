@@ -3,6 +3,7 @@ package com.devhow.htmxdemo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,8 +22,9 @@ public class ClickToEdit {
     }
 
     @PostMapping("/edit/{id}")
-    public String editForm(Contact contact, Model model) {
+    public String editForm(Contact contact, Model model, @PathVariable String id) {
         model.addAttribute("contact", contact);
+        model.addAttribute("id", id);
         return "click-to-edit-form";
     }
 
