@@ -29,9 +29,9 @@ public class UserController {
     @ResponseBody
     String ping(@RequestParam(name = "debug", required = false) String debug) {
         if (debug != null && debug.length() > 0) {
-            return "OK " + new Date().toString() + " " + debug;
+            return "OK " + new Date() + " " + debug;
         }
-        return "OK " + new Date().toString();
+        return "OK " + new Date();
     }
 
     @RequestMapping(path = "/logout")
