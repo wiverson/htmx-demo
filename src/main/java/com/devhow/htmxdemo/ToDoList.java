@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
-import static j2html.TagCreator.*;
-
 @Controller
 @RequestMapping("/public/todo")
 public class ToDoList {
@@ -16,6 +14,7 @@ public class ToDoList {
     @GetMapping
     public String start(Model model) {
         model.addAttribute("now", new Date().toInstant());
+        model.addAttribute("item", "Get Stuff Done");
         return "todo";
     }
 
@@ -25,24 +24,18 @@ public class ToDoList {
         return "";
     }
 
-    @PostMapping(path = "/create", produces = MediaType.TEXT_HTML_VALUE)
-    @ResponseBody
-    public String create(@RequestParam("new-todo") String todo) {
+    /**
+     * Thymeleaf will let you use the fragment syntax in a controller, as shown below.
+     * https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#defining-and-referencing-fragments
+     */
+    @PostMapping(path = "/create")
+    public String create(@RequestParam("new-todo") String todo, Model model) {
 
         if (todo == null || todo.length() < 1)
             return "";
 
-        return tr(
-                td(todo).attr("scope", "row"),
-                td(input().withType("checkbox")),
-                td(input().withType("button").withClasses("btn", "btn-danger").withValue("Delete")
-                        .attr("hx-confirm", "Are you sure?")
-                        .attr("hx-target", "closest tr")
-                        .attr("hx-swap", "outerHTML swap:1s")
-                        .attr("hx-delete", "/public/todo/delete")
-                        .attr("hx-trigger", "click")
-                        .withClasses("btn", "btn-danger")
-                )
-        ).renderFormatted();
+        model.addAttribute("item", todo);
+
+        return "todo :: todo";
     }
 }

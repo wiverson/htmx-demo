@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Click To Edit</title>
     <style>
@@ -12,6 +13,9 @@
     </style>
 </head>
 <body>
+<!--/* This is a layout fragment - it is used by the layout system to identify the content for
+ the templated page.
+ */-->
 <section layout:fragment="content">
     <div class="container alert alert-secondary" role="alert">
         <p>A very simple "todo" UI done with HTMX.</p>
@@ -31,24 +35,33 @@
                 </th>
             </thead>
             <tbody id="todo-list">
-            <tr>
-                <td>Get Groceries</td>
-                <td>
-                    <!--suppress HtmlFormInputWithoutLabel -->
-                    <input type="checkbox"/>
-                </td>
-                <td>
-                    <input
-                            hx-confirm="Are you sure?"
-                            hx-target="closest tr"
-                            hx-swap="outerHTML swap:1s"
-                            hx-delete="/public/todo/delete"
-                            hx-trigger="click"
-                            type="button"
-                            class="btn btn-danger"
-                            value="Delete"/>
-                </td>
-            </tr>
+            <!--/* This is a Thymeleaf fragment - it is used by the ToDoList.java create()
+             controller.
+
+             Thymeleaf will let you use the fragment syntax in a controller!
+
+             https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#defining-and-referencing-fragments
+             */-->
+            <th:block th:fragment="todo">
+                <tr>
+                    <td th:text="${item}">Get Groceries</td>
+                    <td>
+                        <!--suppress HtmlFormInputWithoutLabel -->
+                        <input type="checkbox"/>
+                    </td>
+                    <td>
+                        <input
+                                hx-confirm="Are you sure?"
+                                hx-target="closest tr"
+                                hx-swap="outerHTML swap:1s"
+                                hx-delete="/public/todo/delete"
+                                hx-trigger="click"
+                                type="button"
+                                class="btn btn-danger"
+                                value="Delete"/>
+                    </td>
+                </tr>
+            </th:block>
             </tbody>
         </table>
         <table class="table">
@@ -56,7 +69,7 @@
                 <td colspan="2">
                     <!--suppress HtmlFormInputWithoutLabel -->
                     <input autofocus="autofocus"
-                           class="form-control-plaintext"
+                           class=" form-control form-control-plaintext"
                            id="new-todo"
                            name="new-todo"
                            placeholder="To do..."
