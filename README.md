@@ -1,4 +1,7 @@
-# htmx-demo
+# Spring Boot & [htmx](https://htmx.org/) Demo
+
+**It's possible to be a full stack Java developer and provide dynamic, rich application functionality without complex
+tools or JavaScript frameworks.**
 
 Very simple demonstration of the use of [htmx](https://htmx.org)
 with [Spring Boot](https://spring.io/projects/spring-boot)
@@ -10,9 +13,6 @@ dynamic JavaScript functionality to your app without a complicated JavaScript fr
 
 HTMX + Spring Boot is also a great way to add dynamic HTML functionality to an existing website, perhaps on a completely
 different stack (such as WordPress or SquareSpace).
-
-**It's possible to be a "full stack" Java developer and provide rich application functionality without complex tools or
-JavaScript frameworks.**
 
 ## Using This Project
 
