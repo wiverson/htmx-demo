@@ -1,4 +1,4 @@
-package com.changenode.identity.entity;
+package com.devhow.identity.entity;
 
 public enum UserRole {
 

@@ -1,8 +1,8 @@
 package com.devhow.identity;
 
 import com.devhow.identity.entity.User;
-import com.devhow.identity.user.UserService;
 import com.devhow.identity.user.IdentityServiceException;
+import com.devhow.identity.user.UserService;
 
 import javax.mail.AuthenticationFailedException;
 import java.util.Optional;
