@@ -24,22 +24,22 @@ public class ValueSelect {
      * https://plugins.jetbrains.com/plugin/6884-handlebars-mustache
      */
     @Language("handlebars")
-    String handleBarTemplate =
+    private final String handleBarTemplate =
             """
                     {{#each}}
                     <option value="{{this}}">{{{this}}}</option>
                     {{/each}}
                     """;
+    private final String[] java8 = {"lambdas", "collections", "streams"};
+    private final String[] java9 = {"collections", "streams", "optionals", "interfaces", "jshell"};
+    private final String[] java10 = {"var"};
+    private final String[] java11 = {"strings", "scripts", "lambda var"};
+    private final String[] java12 = {"unicode 11"};
+    private final String[] java13 = {"unicode 12"};
+    private final String[] java14 = {"switch", "better null pointer error messages"};
+    private final String[] java15 = {"text blocks", "Z garbage collector"};
+    private final String[] java16 = {"sockets", "records"};
     Template template;
-    private String[] java8 = {"lambdas", "collections", "streams"};
-    private String[] java9 = {"collections", "streams", "optionals", "interfaces", "jshell"};
-    private String[] java10 = {"var"};
-    private String[] java11 = {"strings", "scripts", "lambda var"};
-    private String[] java12 = {"unicode 11"};
-    private String[] java13 = {"unicode 12"};
-    private String[] java14 = {"switch", "better null pointer error messages"};
-    private String[] java15 = {"text blocks", "Z garbage collector"};
-    private String[] java16 = {"sockets", "records"};
 
     public ValueSelect() {
         Handlebars handlebars = new Handlebars();
