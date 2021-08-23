@@ -8,8 +8,11 @@ and [Thymeleaf](https://www.thymeleaf.org). In addition to Thymeleaf, a few exam
 Build a [Single Page Application (SPA)](https://en.wikipedia.org/wiki/Single-page_application) or just progressively add
 dynamic JavaScript functionality to your app without a complicated JavaScript framework.
 
-It's possible to be a "full stack" Java developer and provide rich application functionality without complex tools and
-frameworks.
+HTMX + Spring Boot is also a great way to add dynamic HTML functionality to an existing website, perhaps on a completely
+different stack (such as WordPress or SquareSpace).
+
+**It's possible to be a "full stack" Java developer and provide rich application functionality without complex tools or
+JavaScript frameworks.**
 
 ## Using This Project
 
@@ -18,11 +21,11 @@ Requirements: [JDK](https://adoptopenjdk.net/?variant=openjdk16) 16 and [Apache 
 That's it. No npm, no JavaScript frameworks, no REST services generating JSON that is then converted back to HTML in the
 browser.
 
-Once those are installed, just run `mvn spring-boot:run` and hit [http://localhost:8080](http://localhost:8080)
-and you'll see an index page with links to the various demos.
+Once Java & Maven are installed, you can clone off this project, run `mvn spring-boot:run`
+and go to [http://localhost:8080](http://localhost:8080). You'll see an index page with links to the various demos.
 
-You'll notice that you don't need to install Node.js, npm, or any other tooling to get rich, dynamic UIs - just html,
-css, htmx, bootstrap and a bit of hyperscript.
+You don't need to install Node.js, npm, or any other tooling to get rich, dynamic UIs - just html, css, htmx, bootstrap
+and a bit of hyperscript.
 
 If you want to be fancy, tell folks that you
 are [migrating back to server-side rendering for your SPA applications](https://blog.asayer.io/server-side-rendering-ssr-with-react)
@@ -30,39 +33,40 @@ for performance and security reasons.
 
 ## Dependencies
 
-[WebJars](https://www.webjars.org) are used to install and manage Bootstrap, jQuery, htmx and hyperscript. While
-Bootstrap v5 doesn't technically need jQuery any more, I left it in for now just in case. More information
+[WebJars](https://www.webjars.org) are used to install and manage Bootstrap, htmx and hyperscript. More information
 on [using WebJars with Spring Boot](https://www.webjars.org/documentation#springboot).
 
 You can add the WebJars for [htmx](https://htmx.org/) and [hyperscript](https://hyperscript.org/) to your pom.xml like
 this:
 
 ```xml
+
 <dependencies>
     <dependency>
         <groupId>org.webjars.npm</groupId>
         <artifactId>htmx.org</artifactId>
-        <version>1.4.1</version>
+        <version>(get the current version from [htmx.org](https://htmx.org))</version>
     </dependency>
     <dependency>
         <groupId>org.webjars.npm</groupId>
         <artifactId>hyperscript.org</artifactId>
-        <version>0.0.9</version>
+        <version>(get the current version from [hyperscript.org](https://hyperscript.org))</version>
     </dependency>
 </dependencies>
 ```
 
-...and then add the following to your application Thymeleaf/HTML to use htmx & hyperscript:
+Add the following to your application Thymeleaf/HTML to use htmx & hyperscript:
 
 ```xml
+
 <head>
     <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/hyperscript.org/dist/_hyperscript.js}"></script>
 </head>
 ```
 
-Notice that you don't actually specify the version number for htmx or hyperscript in the HTML declaration - that's all
-handled for you by WebJars and your Maven pom.xml.
+You don't specify the version number for htmx or hyperscript in the HTML declaration - the versions are specified in the
+pom.xml and managed via WebJars.
 
 ## Layout
 
@@ -83,8 +87,8 @@ project.
 ## Spring Security
 
 This project includes a demo illustrating the use of Spring Security with htmx. When you access a path with /private/
-Spring Security will send you to a login page. To create an account, use the sign up page and check the console for
-a link you can copy and paste into your browser.
+Spring Security will send you to a login page. To create an account, use the sign up page and check the console for a
+link you can copy and paste into your browser.
 
 This implementation of Spring Security includes a pretty complete workflow for an email/password based user registration
 system. If you pop in a valid SMTP server into the configuration you will have a working:
@@ -95,11 +99,11 @@ system. If you pop in a valid SMTP server into the configuration you will have a
 - User forgot password/email reset
 - RDBMS backed store with properly salted & encrypted passwords
 
-You will find all of the Spring Security implementation details in the /htmx-demo/src/main/java/com/devhow/identity path.
+You will find Spring Security implementation details in /htmx-demo/src/main/java/com/devhow/identity path.
 
-The main fancy feature involving htmx is that if a user is logged in to the app with two pages open - let's say page A and
-page B. If the user logs out on page A, the session is now invalid for page B. In this demo, page B will now correctly
-bounce to the login page if htmx requests any new data.
+The main fancy feature involving htmx is that if a user is logged in to the app with two pages open - let's say page A
+and page B. If the user logs out on page A, the session is now invalid for page B. In this demo, page B will now
+correctly bounce to the login page if htmx requests any new data.
 
 ## Screenshots
 
@@ -135,7 +139,7 @@ correctly - you want to make sure the submission encoding is set right and that 
 server.
 
 Fun fact: the checkbox can only be set to an indeterminate state via JavaScript (in this case, I'm just
-using [hyperscript](https://hyperscript.org).
+using [hyperscript](https://hyperscript.org)).
 
 ![Standard HTML Input Widgets](/www/images/input-widgets-1.png)
 
