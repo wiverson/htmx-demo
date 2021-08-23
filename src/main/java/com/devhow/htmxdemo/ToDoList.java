@@ -30,12 +30,12 @@ public class ToDoList {
      */
     @PostMapping(path = "/create")
     public String create(@RequestParam("new-todo") String todo, Model model) {
-
-        if (todo == null || todo.length() < 1)
-            return "";
-
         model.addAttribute("item", todo);
 
+        // Currently, IntelliJ doesn't recognize a Thymeleaf fragment returned in a controller.
+        // https://youtrack.jetbrains.com/issue/IDEA-276625
+        //
+        //noinspection SpringMVCViewInspection
         return "todo :: todo";
     }
 }
