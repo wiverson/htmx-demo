@@ -13,8 +13,12 @@
     </style>
 </head>
 <body>
-<!--/* This is a layout fragment - it is used by the layout system to identify the content for
- the templated page.
+<!--/*
+This is a layout fragment - it is used by the layout system to identify the content template.
+
+You can find the template layout in src/main/resources/templates/layout.html
+
+https://www.thymeleaf.org/doc/articles/layouts.html
  */-->
 <section layout:fragment="content">
     <div class="container alert alert-secondary" role="alert">
@@ -50,15 +54,15 @@
                         <input type="checkbox"/>
                     </td>
                     <td>
-                        <input
+                        <button
+                                class="btn btn-danger"
                                 hx-confirm="Are you sure?"
                                 hx-target="closest tr"
                                 hx-swap="outerHTML swap:1s"
-                                hx-delete="/public/todo/delete"
                                 hx-trigger="click"
-                                type="button"
-                                class="btn btn-danger"
-                                value="Delete"/>
+                                th:attr="hx-delete=@{/public/todo/delete}"
+                        >Delete
+                        </button>
                     </td>
                 </tr>
             </th:block>
@@ -69,7 +73,7 @@
                 <td colspan="2">
                     <!--suppress HtmlFormInputWithoutLabel -->
                     <input autofocus="autofocus"
-                           class=" form-control form-control-plaintext"
+                           class="form-control form-control-plaintext"
                            id="new-todo"
                            name="new-todo"
                            placeholder="To do..."
@@ -77,15 +81,17 @@
                            type="text">
                 </td>
                 <td class="w-25">
-                    <input
+                    <button
                             _="on htmx:afterRequest put '' into #new-todo.value"
                             id="mon"
                             hx-include="#new-todo"
-                            th:hx-post="@{/public/todo/create}"
+                            th:attr="hx-post=@{/public/todo/create}"
                             hx-target="#todo-list"
                             hx-swap="beforeend"
                             hx-trigger="click"
-                            type="button" class="btn btn-primary" value="Add"/></td>
+                            class="btn btn-primary">Add
+                    </button>
+                </td>
             </tr>
         </table>
     </div>
