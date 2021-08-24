@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 .DS_Store
+**/_pgbackup/**
