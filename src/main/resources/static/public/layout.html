@@ -41,6 +41,15 @@
     </div>
 </nav>
 
+<!--/*@thymesVar id="message" type="java.lang.String"*/-->
+<div th:if="${message}" class="alert alert-primary text-center" role="alert">
+    <span th:text="${message}"></span>
+</div>
+<!--/*@thymesVar id="error" type="java.lang.String"*/-->
+<div th:if="${error}" class="alert alert-danger text-center" role="alert">
+    <span th:text="${error}"></span>
+</div>
+
 <section layout:fragment="content">
     <p>Page content goes here</p>
 </section>
