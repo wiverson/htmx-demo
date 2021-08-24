@@ -1,6 +1,8 @@
 package com.devhow.identity.user;
 
 import com.devhow.identity.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,8 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "/ping", produces = "text/plain")
     @ResponseBody
@@ -114,12 +118,14 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    String signUp(User user, ModelMap modelMap) {
+    String signUp(User user, @RequestParam(name = "password-confirm") String confirm, ModelMap modelMap) {
         try {
+            if (!user.getPassword().equals(confirm))
+                throw new IdentityServiceException(IdentityServiceException.Reason.BAD_PASSWORD, "Passwords do not match");
             userService.signUpUser(user.getUsername(), user.getPassword(), false);
             return "redirect:/public/sign-in?message=Check%20your%20email%20to%20confirm%20your%20account%21";
         } catch (IdentityServiceException e) {
-            modelMap.addAttribute(ERROR, "Bad Sign Up");
+            modelMap.addAttribute(ERROR, e.getMessage());
         } catch (AuthenticationFailedException authenticationFailedException) {
             modelMap.addAttribute(ERROR, "Can't send email - email server is down/unreachable.");
             authenticationFailedException.printStackTrace();
