@@ -5,6 +5,7 @@ spring:
     banner-mode: "off"
   thymeleaf:
     cache: false
+    prefix: classpath:/static/public/
   jpa:
     open-in-view: true
   mail:
