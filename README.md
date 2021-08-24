@@ -79,6 +79,20 @@ includes the line `<section layout:fragment="content">` which instructs the
 [Thymeleaf Layout Dialect](https://github.com/ultraq/thymeleaf-layout-dialect) to wrap the section with
 [layout.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/templates/layout.html).
 
+## Visual Design
+
+This project has been tweaked slightly to make it work better with visual design tools
+like [Pinegrow](https://pinegrow.com/). Pinegrow (and other similar tools) expect to find the html templates and all
+related assets in a single directory. By default, Spring Boot splits Thymeleaf html templates into one directory
+(templates) and static public assets in another (static/public). This completely breaks all visual design tools.
+
+In this project, the Thymeleaf html templates AND the static assets all live in the same folder (static/public). Spring
+Security is configured to block paths with the .html extension, so the raw templates aren't visible to users.
+
+Considering that one of the main features of Thymeleaf is the use of valid, complete html, this is a big productivity
+advantage for swapping this configuration around. There shouldn't be anything in your html files but basic markup
+anyways - we are long, long past the days when JDBC/RDBMS passwords would be stored in JSP files.
+
 ## Logging
 
 The application.yaml and logback.xml files are set up to dramatically reduce the log noise for a typical Spring Boot

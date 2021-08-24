@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title>Click To Edit</title>
+        <!--/* Used only for editing in Pinegrow -->         
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+        <!--*/-->
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="container alert alert-secondary" role="alert">
+                <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/click-to-edit/" target="_blank">htmx
+            Click To Edit demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
+            </div>
+            <div class="container">
+                <form hx-post="/public/click-to-edit/edit/1" hx-target="this" hx-swap="outerHTML">
+                    <div>
+                        <label>First Name</label>                                                : 
+                        <span th:text="${contact.firstName}"></span>
+                    </div>
+                    <div>
+                        <label>Last Name</label>                                                : 
+                        <span th:text="${contact.lastName}"></span>
+                    </div>
+                    <div>
+                        <label>Email</label>                                                : 
+                        <span th:text="${contact.email}"></span>
+                    </div>
+                    <input type="hidden" name="firstName" th:value="${contact.firstName}">
+                    <input type="hidden" name="lastName" th:value="${contact.lastName}">
+                    <input type="hidden" name="email" th:value="${contact.email}">
+                    <button class="btn btn-primary">
+                        Click To Edit
+</button>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

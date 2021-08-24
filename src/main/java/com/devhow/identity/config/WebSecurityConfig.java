@@ -38,10 +38,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 if(activeProfile.contains("h2"))
                     http.headers().frameOptions().disable();
                 http.authorizeRequests()
+                    .antMatchers("/**/*.html").denyAll()
                     .antMatchers("/public/**", "/webjars/**", "/", "/logout", "/api/**", "/login", "/h2-console/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
+
                     .and()
                 .formLogin()
                     .loginPage("/public/sign-in").permitAll()

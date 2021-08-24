@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+    <head>
+        <title>HTML Input Gallery</title>
+        <!--/* Used only for editing in Pinegrow -->         
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+        <!--*/-->
+        <style>.server-messages { position: fixed; bottom: 0; right: 0; width: 50%; padding: 3px 3px 3px 3px; z-index: 100; margin: 20px 20px 20px 20px; color: white; background-color: black; } body { padding-bottom: 13em; }</style>
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="container alert alert-secondary" role="alert">
+                <p>Sample of all modern HTML input types combined with HTMX. Excludes month and week as they are not broadly
+            supported. Includes reasonable Bootstrap 5 classes for nicer styles.</p>
+            </div>
+            <div class="container server-messages shadow-lg">
+                <div>
+                    <h5 class="m-3">Server Generated Messages</h5>
+                    <div id="event" class="container card-body">
+</div>
+                    <div class="card-footer">
+                        <button class="btn btn-light" _="on click set #event.innerHTML to ''">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <form>
+                    <h3>Core UI</h3>
+                    <div class="mb-3">
+                        <input class="btn btn-primary" hx-post="/public/input/button" hx-swap="beforeend" hx-target="#event" hx-trigger="click" hx-vals='{"demo-button": "Cool Blue Button"}' id="demo-button" name="demo-button" type="button" value="Button">
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <input checked class="form-check-input" hx-post="/public/input/checkbox" hx-swap="beforeend" hx-target="#event" hx-trigger="click" id="demo-checkbox" name="demo-checkbox-1" type="checkbox" hx-vals='{"checkbox": "demo-checkbox-1"}'>
+                            <label for="demo-checkbox" class="form-label">Checkbox</label>
+                        </div>
+                        <div class="mb-3 col">
+                            <input _="on load set my.indeterminate to true" class="form-check-input" hx-post="/public/input/checkbox" hx-swap="beforeend" hx-target="#event" hx-trigger="click" hx-vals='{"checkbox": "demo-checkbox-2"}' id="indeterminate-checkbox" name="demo-checkbox-2" type="checkbox" value="demo-checkbox-value-2">
+                            <label for="indeterminate-checkbox" class="form-label">Checkbox (indeterminate)</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <label class="form-label">Switch (Bootstrap Checkbox)
+                                <input checked class="form-check-input" hx-post="/public/input/checkbox" hx-swap="beforeend" hx-target="#event" hx-trigger="click" hx-vals='{"checkbox": "demo-checkbox-switch"}' name="demo-checkbox-switch" type="checkbox" value="demo-checkbox-value">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-outline-dark px-3" hx-post="/public/input/button" hx-swap="beforeend" hx-target="#event" hx-trigger="click" hx-vals='{"demo-button": "SVG Font Icon Button"}' type="button">
+                            <i class="bi bi-bag-check-fill clickable-icon" style="font-size: 1.5rem; color: #0C6EFD;" aria-label="Bag"></i>
+                        </button>
+                        Clickable SVG Font Icon
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <label>Radio A
+                                <input checked class="form-check-input" hx-post="/public/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click" id="demo-radio-a" name="demo-radio" type="radio" value="a">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>Radio B
+                                <input hx-post="/public/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click" id="demo-radio-b" class="form-check-input" type="radio" name="demo-radio" value="b">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label>Radio C
+                                <input hx-post="/public/input/radio" hx-swap="beforeend" hx-target="#event" hx-trigger="click" id="demo-radio-c" class="form-check-input" type="radio" name="demo-radio" value="c">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-form-label">
+                            <label class="form-label" for="demo-slider">Range</label>
+                        </div>
+                        <div class="col">
+                            <input id="demo-slider" type="range" class="form-range" name="demo-range" min="0" max="100" hx-post="/public/input/slider" hx-swap="beforeend" hx-target="#event" hx-trigger="click" _="on load or input set #slider-value.innerText to my.value">
+                        </div>
+                        <div class="col-sm-1">
+                            <span id="slider-value" class="align-top"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-3 col-form-label">
+                            <label for="demo-single-select">Select Single</label>
+                        </div>
+                        <div class="col">
+                            <select id="demo-single-select" class="form-select" hx-post="/public/input/select-single" hx-swap="beforeend" hx-target="#event" hx-trigger="change" name="demo-select-single">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-3 col-form-label">
+                            <label for="demo-select-multiple">Select Multiple</label>
+                        </div>
+                        <div class="col">
+                            <select id="demo-select-multiple" class="form-select" multiple size="3" hx-post="/public/input/select-multiple" hx-swap="beforeend" hx-target="#event" hx-trigger="change" name="demo-select-multiple">
+                                <option value="1" selected>One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h3>Date & Time Controls</h3>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Date
+                                <input hx-post="/public/input/date" hx-swap="beforeend" hx-target="#event" hx-trigger="change" type="date" class="form-control" name="demo-date">
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Time
+                                <input hx-post="/public/input/time" hx-swap="beforeend" hx-target="#event" hx-trigger="change" class="form-control" type="time" name="demo-time">
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Date/Time (Local)
+                                <input hx-post="/public/input/datetime" hx-swap="beforeend" hx-target="#event" hx-trigger="change" type="datetime-local" class="form-control" name="demo-date-time-local">
+                            </label>
+                        </div>
+                    </div>
+                    <h3>Special Input</h3>
+                    <div class="mb-3 input-group">
+                        <label class="input-group-text" for="demo-color">Color</label>
+                        <input type="color" style="height: 2.5em; width: 3em" id="demo-color" hx-post="/public/input/color" hx-swap="beforeend" hx-target="#event" hx-trigger="change" name="demo-color" value="#0000FF">
+                    </div>
+                    <div class="mb-3">
+                        <input type="file" class="form-control" name="demo-file" hx-post="/public/input/file" hx-swap="beforeend" hx-target="#event" hx-trigger="change" hx-encoding="multipart/form-data">
+                    </div>
+                    <div class="mb-3 input-group">
+                        <label class="input-group-text" for="demo-number">Number</label>
+                        <input type="number" id="demo-number" hx-post="/public/input/number" hx-swap="beforeend" hx-target="#event" hx-trigger="change" class="form-control" name="demo-number" min="0" max="100">
+                    </div>
+                    <h3>Text Input</h3>
+                    <div class="mb-3 form-floating">
+                        <input id="demo-text-single" class="form-control" type="text" placeholder="Text" name="demo-single-string" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change">
+                        <label class="form-label" for="demo-text-single">Text (Single)</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <textarea id="demo-text-multiple" class="form-control" rows="3" placeholder="Text" name="demo-multi-string" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change" style="height: 8em"></textarea>
+                        <label class="form-label" for="demo-text-multiple">Text (Multi-line)</label>
+                    </div>
+                    <p>The controls below provide additional hints for built-in validation on desktop and mobile. On mobile some
+                of these also will bring up special keyboards (e.g. <a href="https://developer.apple.com/library/archive/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html" target="_blank">Safari</a>).</p>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="demo-email" name="demo-email" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change" placeholder="name@example.com">
+                        <label class="form-label" for="demo-email">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" id="demo-password" class="form-control" name="demo-password" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change" placeholder="Password">
+                        <label class="form-label" for="demo-password">Password</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input type="tel" id="demo-tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="demo-tel" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change" placeholder="123-456-7890">
+                        <label class="form-label" for="demo-tel">Telephone</label>
+                    </div>
+                    <p>Unlike the other text input fields, this Search field uses a 500ms keyup delay to query the server.</p>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="demo-search" type="search" name="demo-search" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="keyup changed delay:500ms" placeholder="Search">
+                        <label class="form-label" for="demo-search">Search</label>
+                    </div>
+                    <div class="mb-3 form-floating">
+                        <input id="demo-url" class="form-control" type="url" placeholder="URL" name="demo-url" hx-post="/public/input/text" hx-swap="beforeend" hx-target="#event" hx-trigger="change">
+                        <label for="demo-url" class="form-label">URL</label>
+                    </div>
+                    <h3>Form Controls</h3>
+                    <p>The Reset button will return the form above to the state it was in when it was rendered. Note that Submit
+                will not actually submit if the values above (e.g. email or URL) are invalid.</p>
+                    <div class="mb-3">
+                        <input class="btn btn-danger form-control" type="reset" hx-post="/public/input/reset" hx-swap="beforeend" hx-target="#event" hx-trigger="click" _="on click set #indeterminate-checkbox.indeterminate to true">
+                    </div>
+                    <div class="mb-3">
+                        <input hx-post="/public/input/submit" hx-swap="beforeend" hx-target="#event" hx-trigger="click" class="btn btn-primary form-control" type="submit">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

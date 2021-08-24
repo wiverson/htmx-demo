@@ -32,3 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 .DS_Store
+**/_pgbackup/**
+src/main/resources/static/public/_pginfo/fonts.json

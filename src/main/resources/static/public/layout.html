@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!--Bootstrap CSS-->
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <!--/* Used only for editing in Pinegrow -->         
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+        <!--*/-->
+        <!--Bootstrap JS-->
+        <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <!--HTMX-->
+        <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+        <!-- Hyperscript for fancier stuff -->
+        <script type="text/javascript" th:src="@{/webjars/hyperscript.org/dist/_hyperscript.js}"></script>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.css}">
+        <style>
+        .htmx-indicator {
+            background-color: black;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            padding: 5px 5px 5px 5px
+        }
+    </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">HTMX + Spring Boot Demo</a>
+                <p class="navbar-text">Rendered at <!--suppress ThymeleafVariablesResolveInspection --> <span th:text="${#dates.format(now, 'dd/MMM/yyyy HH:mm')}"></span></p>
+            </div>
+        </nav>
+        <!--/*@thymesVar id="message" type="java.lang.String"*/-->
+        <div th:if="${message}" class="alert alert-primary text-center" role="alert">
+            <span th:text="${message}"></span>
+        </div>
+        <!--/*@thymesVar id="error" type="java.lang.String"*/-->
+        <div th:if="${error}" class="alert alert-danger text-center" role="alert">
+            <span th:text="${error}"></span>
+        </div>
+        <section layout:fragment="content">
+            <p>Page content goes here</p>
+        </section>
+        <img alt="Loading Indicator" class="htmx-indicator" src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/master/svg-loaders/spinning-circles.svg"/>
+    </body>
+</html>

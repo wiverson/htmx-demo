@@ -17,6 +17,8 @@
                                                 src="/public/logo.png" width="72" height="72"
                                                 alt="Demo App"></a></div>
 
+        <!--/*@thymesVar id="error" type="java.lang.String"*/-->
+        <div class="form-floating mb-3 alert alert-danger text-center" role="alert" th:text="${error}">Error</div>
         <div class="form-floating mb-3">
             <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required
                    autofocus/>

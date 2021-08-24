@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+    <head>
+        <title>Infinite Scroll</title>
+        <!--/* Used only for editing in Pinegrow -->         
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+        <!--*/-->
+    </head>
+    <body>
+        <section layout:fragment="content">
+            <div class="container alert alert-secondary" role="alert">
+                <p>This is heavily tweaked version of the <a href="https://htmx.org/examples/infinite-scroll/" target="_blank">htmx
+            Infinite Scroll demo</a>, modified for vanilla Bootstrap and Spring Boot.</p>
+            </div>
+            <div class="container">
+                <table hx-indicator=".htmx-indicator" hx-get="/public/infinite-scroll/page/1" hx-trigger="revealed" hx-swap="innerHTML settle:0s">
+                    <tr>
+                        <td>Loading...</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </body>
+</html>

@@ -25,7 +25,7 @@ public class EmailSenderService {
     @Async
     public void sendEmail(SimpleMailMessage email) {
         if (mailTest) {
-            logger.info(email.getText());
+            logger.error(email.getText());
         } else {
             try {
                 javaMailSender.send(email);
