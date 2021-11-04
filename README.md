@@ -7,6 +7,8 @@ tools or JavaScript frameworks.**
 in modern full stack Java. I'll be moving all of the demos here to that project shortly - it has a much better, easier to
 use and more robust Spring Security implementation based on [Supabase.io](https://supabase.io/)**
 
+[YouTube video](https://youtu.be/38WAVRfxPxI) walking through this repo!
+
 Very simple demonstration of the use of [htmx](https://htmx.org)
 with [Spring Boot](https://spring.io/projects/spring-boot)
 and [Thymeleaf](https://www.thymeleaf.org). In addition to Thymeleaf, a few examples also use
