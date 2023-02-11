@@ -10,17 +10,18 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
 
     private final SecurityUserService userService;
 
     private final PasswordEncoder passwordEncoder;
+
     @Value("spring.profiles.active")
     private String activeProfile;
 
@@ -29,17 +30,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // @formatter:off
                 http.csrf().disable();
 
                 // Only allow frames if using h2 as the database
                 if(activeProfile.contains("h2"))
                     http.headers().frameOptions().disable();
-                http.authorizeRequests()
-                    .antMatchers("/**/*.html").denyAll()
-                    .antMatchers("/public/**", "/webjars/**", "/", "/logout", "/api/**", "/login", "/h2-console/**")
+                http.authorizeHttpRequests()
+                    .requestMatchers("/**/*.html").denyAll()
+                    .requestMatchers("/public/**", "/webjars/**", "/", "/logout", "/api/**", "/login", "/h2-console/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
@@ -60,6 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID");
+        return http.build();
+
 //                .and()
 //                    .anonymous();
         // @formatter:on

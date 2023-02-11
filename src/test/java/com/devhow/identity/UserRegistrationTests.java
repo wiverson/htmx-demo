@@ -4,14 +4,12 @@ import com.devhow.identity.entity.User;
 import com.devhow.identity.entity.UserValidation;
 import com.devhow.identity.user.IdentityServiceException;
 import com.devhow.identity.user.UserService;
+import jakarta.mail.AuthenticationFailedException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.mail.AuthenticationFailedException;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Optional;
@@ -20,8 +18,7 @@ import java.util.Random;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = {"mail.test=true"})
+@SpringBootTest(properties = {"mail.test=true"})
 public class UserRegistrationTests {
 
     final private String BCRYPT_TOKEN = "{bcrypt}$2a$";

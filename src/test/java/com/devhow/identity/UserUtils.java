@@ -3,8 +3,8 @@ package com.devhow.identity;
 import com.devhow.identity.entity.User;
 import com.devhow.identity.user.IdentityServiceException;
 import com.devhow.identity.user.UserService;
+import jakarta.mail.AuthenticationFailedException;
 
-import javax.mail.AuthenticationFailedException;
 import java.util.Optional;
 import java.util.Random;
 
