@@ -1,15 +1,13 @@
 package com.devhow.identity.user;
 
 import com.devhow.identity.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.mail.AuthenticationFailedException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.mail.AuthenticationFailedException;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 import static com.devhow.identity.user.IdentityServiceException.Reason.BAD_PASSWORD_RESET;
@@ -26,8 +24,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "/ping", produces = "text/plain")
     @ResponseBody

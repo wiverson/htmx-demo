@@ -2,9 +2,9 @@ package com.devhow.identity.entity;
 
 
 import com.devhow.identity.user.TimeUtil;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Calendar;

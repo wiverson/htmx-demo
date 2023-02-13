@@ -2,12 +2,12 @@ package com.devhow.identity.user;
 
 import com.devhow.identity.entity.User;
 import com.devhow.identity.entity.UserValidation;
+import jakarta.mail.AuthenticationFailedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.mail.AuthenticationFailedException;
 import java.util.Optional;
 
 import static com.devhow.identity.user.IdentityServiceException.Reason.*;
