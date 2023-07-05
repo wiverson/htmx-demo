@@ -39,6 +39,10 @@ public class ValueSelect {
     private final String[] java14 = {"switch", "better null pointer error messages"};
     private final String[] java15 = {"text blocks", "Z garbage collector"};
     private final String[] java16 = {"sockets", "records"};
+    private final String[] java17 = {"pattern matching for switch","sealed classes", "foreign function and memory api"};
+    private final String[] java18 = {"UTF-8 by default", "jwebserver"};
+    private final String[] java19 = {"virtual threads", "structured concurrency", "vector api"};
+    private final String[] java20 = {"scoped values", "record patterns"};
     Template template;
 
     public ValueSelect() {
@@ -77,6 +81,14 @@ public class ValueSelect {
             return template.apply(java15);
         if ("java16".equals(make))
             return template.apply(java16);
+        if ("java17".equals(make))
+            return template.apply(java17);
+        if ("java18".equals(make))
+            return template.apply(java18);
+        if ("java19".equals(make))
+            return template.apply(java19);
+        if ("java20".equals(make))
+            return template.apply(java20);
         throw new IllegalArgumentException("Unknown make");
     }
 }
