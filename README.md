@@ -66,13 +66,13 @@ Add the following to your application Thymeleaf/HTML to use htmx & hyperscript:
 ```xml
 
 <head>
-    <script type="text/javascript" th:src="@{/webjars/htmx.org/<htmx_version_number>/dist/htmx.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/hyperscript.org/<hyperscript_version_number>/dist/_hyperscript.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/hyperscript.org/dist/_hyperscript.js}"></script>
 </head>
 ```
 
-You don't specify the version number for htmx or hyperscript in the HTML declaration - the versions are specified in the
-pom.xml and managed via WebJars.
+You don't specify the version number for htmx or hyperscript in the HTML declaration - the versions are are being
+managed automatically by the embedded library `org.webjars:webjars-locator-core`.
 
 ## Layout
 
