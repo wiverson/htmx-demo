@@ -22,7 +22,7 @@ different stack (such as WordPress or SquareSpace).
 
 ## Using This Project
 
-Requirements: [JDK](https://adoptopenjdk.net/?variant=openjdk16) 16 and [Apache Maven](https://maven.apache.org/).
+Requirements: [JDK](https://adoptopenjdk.net/?variant=openjdk17) 17 and [Apache Maven](https://maven.apache.org/).
 
 That's it. No npm, no JavaScript frameworks, no REST services generating JSON that is then converted back to HTML in the
 browser.
