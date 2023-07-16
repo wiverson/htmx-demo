@@ -3,7 +3,8 @@
 **It's possible to be a full stack Java developer and provide dynamic, rich application functionality without complex
 tools or JavaScript frameworks.**
 
-**Please note that you should check out my other GitHub template, [Frisson](https://github.com/ChangeNode/frisson) if you are interested
+**Please note that you should check out my other GitHub template, [spring-boot-supabase](https://github.com/ChangeNode/spring-boot-supabase) if 
+you are interested
 in modern full stack Java. I'll be moving all of the demos here to that project shortly - it has a much better, easier to
 use and more robust Spring Security implementation based on [Supabase.io](https://supabase.io/)**
 
