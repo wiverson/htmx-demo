@@ -80,10 +80,10 @@ I don't like to repeat myself, so I use Thymeleaf layouts to keep the copy & pas
 a `layout:fragment="content"` declaration to pull in a layout which includes the standard `<head>`
 
 To see an example of
-this, [index.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/templates/index.html)
+this, [index.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/static/public/index.html)
 includes the line `<section layout:fragment="content">` which instructs the
 [Thymeleaf Layout Dialect](https://github.com/ultraq/thymeleaf-layout-dialect) to wrap the section with
-[layout.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/templates/layout.html).
+[layout.html](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/static/public/layout.html).
 
 ## Visual Design
 
@@ -128,8 +128,8 @@ correctly bounce to the login page if htmx requests any new data.
 ## Screenshots
 
 The mandatory basic web-front end to do list sample app. Here are the
-[Java controller](https://github.com/wiverson/htmx-demo/blob/master/src/main/java/com/devhow/htmxdemo/demo/ToDoList.java)
-and the [Thymeleaf template](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/templates/todo.html).
+[Java controller](https://github.com/wiverson/htmx-demo/blob/master/src/main/java/com/devhow/htmxdemo/ToDoList.java)
+and the [Thymeleaf template](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/static/public/todo.html).
 You may notice that there is a very small amount of [hyperscript](https://hyperscript.org) added to the page to address
 event edge cases not handled by htmx alone.
 
@@ -137,7 +137,7 @@ event edge cases not handled by htmx alone.
 
 This infinite scroll demo uses the [java-faker](https://github.com/DiUS/java-faker) library to generate an endless
 stream of fake data. The more you scroll, the more data you'll see. In this case, the
-[Java controller](https://github.com/wiverson/htmx-demo/blob/master/src/main/java/com/devhow/htmxdemo/demo/InfiniteScroll.java)
+[Java controller](https://github.com/wiverson/htmx-demo/blob/master/src/main/java/com/devhow/htmxdemo/InfiniteScroll.java)
 is just using Java text blocks to return the data. While very, very simple (and fast!) this isn't really a great idea,
 in particular due to potential issues around HTML escaping. For most situations you are much better off using either
 Thymeleaf templates, [Handlebars/Mustache](https://github.com/jknack/handlebars.java) or [j2html](https://j2html.com/)
@@ -146,8 +146,8 @@ for these fragments.
 ![Infinite Scroll](/www/images/infinite-scroll.png)
 
 The next two screenshots are for a single
-[Java controller](https://github.com/wiverson/htmx-demo/blob/master/src/main/java/com/devhow/htmxdemo/demo/InputCatalog.java)
-and [Thymeleaf template](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/templates/input-catalog.html)
+[Java controller](https://github.com/wiverson/htmx-demo/blob/master/src/main/java/com/devhow/htmxdemo/InputCatalog.java)
+and [Thymeleaf template](https://github.com/wiverson/htmx-demo/blob/master/src/main/resources/static/public/input-catalog.html)
 .
 
 Every single input immediately posts back data to the controller. In this case, the response is sent back as an element
